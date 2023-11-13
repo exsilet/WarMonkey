@@ -14,6 +14,7 @@ namespace Player
         private Vector3 _currentMovement;
         private bool _isMovedPressed;
         private Camera _camera;
+        public bool Select = false;
 
         private void Start()
         {
@@ -29,8 +30,21 @@ namespace Player
 
         private void Update()
         {
-            HandleAnimation();
-            OnMovementInput();
+            if (Select)
+            {
+                HandleAnimation();
+                OnMovementInput();
+            }
+        }
+
+        public void OnSelect()
+        {
+            Select = true;
+        }
+
+        public void UnSelect()
+        {
+            Select = false;
         }
 
         private void HandleAnimation()
@@ -57,7 +71,7 @@ namespace Player
                 _currentMovement.y = 0;
                 _currentMovement.Normalize();
 
-                transform.forward = _currentMovement;
+                //transform.forward = _currentMovement;
             }
 
             HandleGravity();
