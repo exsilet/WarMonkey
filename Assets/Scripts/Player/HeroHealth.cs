@@ -8,7 +8,7 @@ namespace Player
     public class HeroHealth : MonoBehaviour, IHealth
     {
         private State _state;
-        private Animator _animator;
+        private HeroAnimator _animator;
         
         public event Action HealthChanged;
 
@@ -38,6 +38,7 @@ namespace Player
                 return;
             
             Current -= damage;
+            _animator.PlayHit();
         }
     }
 }

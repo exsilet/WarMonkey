@@ -5,6 +5,6 @@
         public const string HeroPath = "Hero/player";
         public const string HudPath = "Hud/Hud";
         public const string HudMenuPath = "Hud/MenuHud";
-        public const string DraggableItemPath = "UI/DragbbleMinions";
+        public const string SelectUnitsPath = "Hud/SelectUnits";
     }
 }

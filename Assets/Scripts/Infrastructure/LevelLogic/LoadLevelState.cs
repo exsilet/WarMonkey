@@ -52,12 +52,14 @@ namespace Infrastructure.LevelLogic
         private void InitGameWorld()
         {
             InitSpawners();
+            GameObject selectedUnits = _gameFactory.CreateSelectUnits();
 
             foreach (GameObject player in GameObject.FindGameObjectsWithTag(InitialPointTag))
             {
                 GameObject hero = _gameFactory.CreateHero(player);
+                selectedUnits.GetComponent<SelectUnit>().Construct(hero.GetComponent<Selectable>());
             }
-            
+
             GameObject hud = _gameFactory.CreateHud();
             InitHud();
         }

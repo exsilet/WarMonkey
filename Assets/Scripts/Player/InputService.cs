@@ -6,13 +6,13 @@ namespace Player
     {
         protected const string Horizontal = "Horizontal";
         protected const string Vertical = "Vertical";
-        private const string Button = "Fire";
+        private const string Button = "Fire1";
 
         public abstract Vector2 Axis { get; }
 
         public bool IsAttackButtonUp()
         {
-            return SimpleInput.GetButtonUp(Button);
+            return SimpleInput.GetButtonDown(Button);
         }
 
         protected static Vector2 SimpleInputAxis()

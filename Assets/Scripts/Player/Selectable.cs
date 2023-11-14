@@ -4,14 +4,18 @@ namespace Player
 {
     public class Selectable : MonoBehaviour
     {
+        private bool _selected = false;
+
+        public bool Selected => _selected;
+
         public void Select()
         {
-            GetComponent<Renderer>().material.color = Color.yellow;
+            _selected = true;
         }
 
         public void Deselect()
         {
-            GetComponent<Renderer>().material.color = Color.clear;
+            _selected = false;
         }
     }
 }

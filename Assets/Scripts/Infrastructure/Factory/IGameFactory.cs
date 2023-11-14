@@ -8,6 +8,7 @@ namespace Infrastructure.Factory
 {
     public interface IGameFactory : IService
     {
+        GameObject CreateSelectUnits();
         GameObject CreateHero(GameObject at);
         GameObject CreateHud();
         GameObject CreateHudMenu();

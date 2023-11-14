@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace Player
@@ -8,74 +8,95 @@ namespace Player
         [SerializeField] private LayerMask _layerMask;
 
         public Selectable CurrentSelectable;
-        public HeroMover CurrentSelectHero;
         public HeroMover Hero;
-        
+
+        private Selectable _selectable;
+        private RaycastHit _hit;
+        private Ray _ray;
+        private bool selecting;
         private Camera _camera;
-        
+        private Vector3 mouseStartPosition;
+        private List<Selectable> _units = new();
+
+        public void Construct(Selectable selectable)
+        {
+            _selectable = selectable;
+            AddUnits();
+        }
+
         private void Start()
         {
             _camera = Camera.main;
         }
-        
-        private void LateUpdate()
+
+        private void Update()
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(1))
             {
-                SelectPart();
-                Hero = CurrentSelectHero;
+                selecting = true;
+                mouseStartPosition = Input.mousePosition;
+
+                _ray = _camera.ScreenPointToRay(Input.mousePosition);
+
+                if (Physics.Raycast(_ray, out _hit))
+                {
+                    mouseStartPosition = _hit.point;
+                }
             }
 
-            if (Input.GetMouseButtonUp(0))
+            if (Input.GetMouseButtonUp(1))
             {
-                //UpMouse();
+                selecting = false;
+                DeselectAll();
+                Debug.Log(_hit.collider.gameObject.GetComponent<Selectable>());
+
+                if (_hit.collider.gameObject.GetComponent<Selectable>())
+                {
+                    CurrentSelectable = _hit.collider.gameObject.GetComponent<Selectable>();
+                    _hit.collider.gameObject.GetComponent<Selectable>().Select();
+                    Hero = _hit.collider.gameObject.GetComponent<HeroMover>();
+                }
             }
         }
-        
+
+        private void AddUnits()
+        {
+            _units.Add(_selectable);
+        }
+
         private void SelectPart()
         {
             Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
-            Debug.DrawRay(transform.position, transform.forward * 100f, Color.blue);
+            mouseStartPosition = Input.mousePosition;
 
-            if (Physics.Raycast(ray, out var hit))
+            if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                Selectable selectable = hit.collider.gameObject.GetComponent<Selectable>();
-                CurrentSelectHero = hit.collider.gameObject.GetComponent<HeroMover>();
+                _hit = hit;
+                mouseStartPosition = hit.point;
+            }
+        }
 
-                if (selectable)
-                {
-                    if (CurrentSelectable && CurrentSelectable != selectable)
-                    {
-                        Debug.Log("Unselect 1");
-                        Hero.UnSelect();
-                        selectable.Deselect();
-                    }
+        private void SingleSelect(RaycastHit hit)
+        {
+            selecting = false;
+            DeselectAll();
 
-                    CurrentSelectable = selectable;
-                    selectable.Select();
-                    CurrentSelectHero.OnSelect();
-                    Debug.Log("select monkey 1");
-                }
-                else
+            if (mouseStartPosition == Input.mousePosition)
+            {
+                if (hit.collider.gameObject.GetComponent<HeroMover>())
                 {
-                    if (CurrentSelectable)
-                    {
-                        Debug.Log("Unselect 2");
-                        CurrentSelectable.Deselect();
-                        CurrentSelectable = null;
-                        Hero.UnSelect();
-                    }
+                    CurrentSelectable = hit.collider.gameObject.GetComponent<Selectable>();
+                    hit.collider.gameObject.GetComponent<Selectable>().Select();
+                    Hero = hit.collider.gameObject.GetComponent<HeroMover>();
                 }
             }
-            else
+        }
+
+        private void DeselectAll()
+        {
+            foreach (var unit in _units)
             {
-                if (CurrentSelectable)
-                {
-                    Debug.Log("Unselect 3");
-                    CurrentSelectable.Deselect();
-                    CurrentSelectable = null;
-                    Hero.UnSelect();
-                }
+                unit.Deselect();
             }
         }
     }

@@ -32,9 +32,9 @@ namespace Enemy
         {
             _health.HealthChanged -= OnHealthChanged;
       
-            //Animator.PlayDeath();
+            _animator.PlayDeath();
 
-            StartCoroutine(DestroyTimer());
+            //StartCoroutine(DestroyTimer());
       
             Happened?.Invoke();
         }

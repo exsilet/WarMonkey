@@ -7,14 +7,14 @@ namespace Player
     {
         [SerializeField] private float _speed;
         [SerializeField]private CharacterController _characterController;
-        
-        private Animator _animator;
+        [SerializeField] private HeroAnimator _animator;
+
+        private Selectable _selectable;
         private IInputService _inputService;
         private float Epsilon = 0.001f;
         private Vector3 _currentMovement;
         private bool _isMovedPressed;
         private Camera _camera;
-        public bool Select = false;
 
         private void Start()
         {
@@ -24,40 +24,16 @@ namespace Player
         private void Awake()
         {
             _characterController = GetComponent<CharacterController>();
-            _animator = GetComponent<Animator>();
+            _animator = GetComponent<HeroAnimator>();
+            _selectable = GetComponent<Selectable>();
             _inputService = AllServices.Container.Single<IInputService>();
         }
 
         private void Update()
         {
-            if (Select)
+            if (_selectable.Selected)
             {
-                HandleAnimation();
                 OnMovementInput();
-            }
-        }
-
-        public void OnSelect()
-        {
-            Select = true;
-        }
-
-        public void UnSelect()
-        {
-            Select = false;
-        }
-
-        private void HandleAnimation()
-        {
-            bool isWalking = _animator.GetBool("Moving");
-
-            if (_isMovedPressed && !isWalking)
-            {
-                _animator.SetBool("Moving", true);
-            }
-            else if (!_isMovedPressed && !isWalking)
-            {
-                _animator.SetBool("Moving", false);
             }
         }
 
@@ -68,8 +44,12 @@ namespace Player
             if (_inputService.Axis.sqrMagnitude > Epsilon)
             {
                 _currentMovement = _camera.transform.TransformDirection(_inputService.Axis);
-                _currentMovement.y = 0;
-                _currentMovement.Normalize();
+
+                HorizontalMovement();
+                VerticalMovement();
+                    
+                //_currentMovement.y = 0;
+                //_currentMovement.Normalize();
 
                 //transform.forward = _currentMovement;
             }
@@ -77,6 +57,37 @@ namespace Player
             HandleGravity();
             
             _characterController.Move(_currentMovement * _speed * Time.deltaTime);
+        }
+
+        private void VerticalMovement()
+        {
+            //animation
+            if (_currentMovement.z != 0)
+            {
+                if (_currentMovement.z > 0)
+                {
+                    Debug.Log("up");
+                }
+                else
+                {
+                    Debug.Log("down");
+                }
+            }
+        }
+
+        private void HorizontalMovement()
+        {
+            if (_currentMovement.x != 0)
+            {
+                if (_currentMovement.x > 0)
+                {
+                    Debug.Log("right");
+                }
+                else
+                {
+                    Debug.Log("left");
+                }
+            }
         }
 
         private void HandleGravity()

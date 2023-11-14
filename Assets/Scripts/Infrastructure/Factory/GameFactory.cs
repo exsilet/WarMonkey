@@ -25,6 +25,12 @@ namespace Infrastructure.Factory
             _staticData = staticData;
         }
 
+        public GameObject CreateSelectUnits()
+        {
+            var selectUnits = _assets.Instantiate(AssetPath.SelectUnitsPath);
+            return selectUnits;
+        }
+
         public GameObject CreateHero(GameObject at)
         {
             var hero = _assets.Instantiate(path: AssetPath.HeroPath, at: at.transform.position);

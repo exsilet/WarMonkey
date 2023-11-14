@@ -28,7 +28,7 @@ namespace Enemy
         {
             Current -= damage;
       
-            //Animator.PlayHit();
+            _animator.PlayHit();
       
             HealthChanged?.Invoke();
         }
