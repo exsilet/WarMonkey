@@ -34,7 +34,7 @@ namespace Logic
         private void Spawn()
         {
             GameObject enemy = _factory.CreatEnemy(EnemyTypeID, transform);
-            _enemyDeath = enemy.GetComponent<EnemyDeath>();
+            _enemyDeath = enemy.GetComponentInChildren<EnemyDeath>();
             _enemyDeath.Happened += Slay;
         }
 

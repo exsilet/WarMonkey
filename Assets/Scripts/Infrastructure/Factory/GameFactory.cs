@@ -65,7 +65,7 @@ namespace Infrastructure.Factory
             EnemyStaticData enemyData = _staticData.ForTower(typeId);
             GameObject enemy = Object.Instantiate(enemyData.Prefab, parent.position, Quaternion.identity, parent);
 
-            var health = enemy.GetComponent<IHealth>();
+            var health = enemy.GetComponentInChildren<IHealth>();
             health.Current = enemyData.Hp;
             health.Max = enemyData.Hp;
         

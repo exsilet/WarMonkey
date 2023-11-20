@@ -8,7 +8,7 @@ namespace Weapons
         {
             foreach (var bullet in Bullets)
             {
-                CreateBullet(shootPoint, power < 0.5f ? Bullets[0] : Bullets[1]);
+                CreateBullet(shootPoint, power <= 0.5f ? Bullets[0] : Bullets[1]);
                 break;
             }
         }

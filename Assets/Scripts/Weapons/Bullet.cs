@@ -18,7 +18,7 @@ namespace Weapons
             if (other.TryGetComponent(out EnemyHealth enemy))
             {
                 enemy.TakeDamage(_damage);
-                Destroy(this);
+                Destroy(gameObject);
             }
         }
     }

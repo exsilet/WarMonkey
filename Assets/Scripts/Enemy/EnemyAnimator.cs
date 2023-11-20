@@ -6,7 +6,6 @@ namespace Enemy
 {
     public class EnemyAnimator : MonoBehaviour, IAnimationStateReader
     {
-        [SerializeField] private CharacterController _characterController;
         [SerializeField] public Animator _animator;
         
         private static readonly int MoveHash = Animator.StringToHash("Walking");
