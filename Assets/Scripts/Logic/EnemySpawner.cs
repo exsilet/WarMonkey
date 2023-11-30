@@ -4,6 +4,7 @@ using Infrastructure.Factory;
 using Infrastructure.Service;
 using Infrastructure.Service.SaveLoad;
 using Infrastructure.StaticData.Enemy;
+using UI.Element;
 using UnityEngine;
 
 namespace Logic
@@ -15,6 +16,7 @@ namespace Logic
         private bool _slain;
         private IGameFactory _factory;
         private EnemyDeath _enemyDeath;
+        private StartBattle _startBattle;
 
         private void Awake()
         {
@@ -22,6 +24,11 @@ namespace Logic
             _factory = AllServices.Container.Single<IGameFactory>();
         }
 
+
+        public void Construct(StartBattle startBattle)
+        {
+            _startBattle = startBattle;
+        }
 
         public void LoadProgress(PlayerProgress progress)
         {
@@ -31,9 +38,11 @@ namespace Logic
                 Spawn();
         }
 
+
         private void Spawn()
         {
             GameObject enemy = _factory.CreatEnemy(EnemyTypeID, transform);
+            //enemy.GetComponentInChildren<EnemyMonkey>().Construct(_startBattle);
             _enemyDeath = enemy.GetComponentInChildren<EnemyDeath>();
             _enemyDeath.Happened += Slay;
         }

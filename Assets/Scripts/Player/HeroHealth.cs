@@ -1,14 +1,16 @@
 using System;
 using Data;
+using Infrastructure.Service.SaveLoad;
 using Logic;
 using UnityEngine;
 
 namespace Player
 {
-    public class HeroHealth : MonoBehaviour, IHealth
+    public class HeroHealth : MonoBehaviour, IHealth, ISavedProgress
     {
+        [SerializeField] private HeroAnimator _animator;
+        
         private State _state;
-        private HeroAnimator _animator;
         
         public event Action HealthChanged;
 
@@ -17,9 +19,9 @@ namespace Player
             get => _state.CurrentHP;
             set
             {
-                if ((int)value != _state.CurrentHP)
+                if (value != _state.CurrentHP)
                 {
-                    _state.CurrentHP = (int)value;
+                    _state.CurrentHP = value;
           
                     HealthChanged?.Invoke();
                 }
@@ -32,13 +34,27 @@ namespace Player
             set => _state.MaxHP = (int)value;
         }
         
+        public void LoadProgress(PlayerProgress progress)
+        {
+            _state = progress.HeroState;
+            HealthChanged?.Invoke();
+        }
+
+        public void UpdateProgress(PlayerProgress progress)
+        {
+            progress.HeroState.CurrentHP = Current;
+            progress.HeroState.MaxHP = Max;
+        }
+        
         public void TakeDamage(int damage)
         {
-            if (Current <= 0)
-                return;
-            
             Current -= damage;
+            
             _animator.PlayHit();
+            
+            HealthChanged?.Invoke();
         }
+        
+
     }
 }

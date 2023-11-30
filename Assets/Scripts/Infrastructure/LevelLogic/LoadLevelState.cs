@@ -5,6 +5,7 @@ using Infrastructure.Service.SaveLoad;
 using Infrastructure.State;
 using Logic;
 using Player;
+using UI.Element;
 using UnityEngine;
 
 namespace Infrastructure.LevelLogic
@@ -20,7 +21,6 @@ namespace Infrastructure.LevelLogic
         private readonly IPersistentProgressService _progressService;
         private IState _stateImplementation;
         private Camera _camera;
-        private List<HeroMover> _heroMovers = new();
 
         public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, LoadingCurtain loadingCurtain,
             IGameFactory gameFactory, IPersistentProgressService progressService)
@@ -51,7 +51,10 @@ namespace Infrastructure.LevelLogic
 
         private void InitGameWorld()
         {
-            InitSpawners();
+            GameObject hud = _gameFactory.CreateHud();
+            
+            InitSpawners(hud);
+            
             GameObject selectedUnits = _gameFactory.CreateSelectUnits();
 
             foreach (GameObject player in GameObject.FindGameObjectsWithTag(InitialPointTag))
@@ -59,16 +62,16 @@ namespace Infrastructure.LevelLogic
                 GameObject hero = _gameFactory.CreateHero(player);
                 selectedUnits.GetComponent<SelectUnit>().Construct(hero.GetComponent<Selectable>());
             }
-
-            GameObject hud = _gameFactory.CreateHud();
+            
             InitHud();
         }
 
-        private void InitSpawners()
+        private void InitSpawners(GameObject hudBattle)
         {
             foreach (GameObject spawnerObject in GameObject.FindGameObjectsWithTag("EnemySpawner"))
             {
                 var spawner = spawnerObject.GetComponent<EnemySpawner>();
+                spawner.GetComponent<EnemySpawner>().Construct(hudBattle.GetComponent<StartBattle>());
                 _gameFactory.Register(spawner);
             }
         }

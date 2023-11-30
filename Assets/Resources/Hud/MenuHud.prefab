@@ -529,6 +529,7 @@ GameObject:
   - component: {fileID: 9204812464020440936}
   - component: {fileID: 4318443503736164610}
   - component: {fileID: 2993621211695531816}
+  - component: {fileID: 6752012800773703714}
   m_Layer: 5
   m_Name: MenuHud
   m_TagString: Untagged
@@ -628,7 +629,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 2f4603a7d90e86645a5524d91b90f082, type: 3}
+  m_audioClip: {fileID: 8300000, guid: c4094441f4e043a46a6d1e5c87655fa5, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -741,6 +742,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startGame: {fileID: 4338339452256946898}
+--- !u!114 &6752012800773703714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3583826824757915217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9669e5b348a6e8744b1d246569d997f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audio: {fileID: 9204812464020440936}
 --- !u!1 &3816111020233631518
 GameObject:
   m_ObjectHideFlags: 0

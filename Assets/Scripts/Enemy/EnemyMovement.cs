@@ -1,80 +1,53 @@
-﻿using System;
-using System.Collections;
-using UnityEngine;
-using Random = UnityEngine.Random;
+﻿using UnityEngine;
+using UnityEngine.AI;
 
 namespace Enemy
 {
     public class EnemyMovement : MonoBehaviour
     {
-        [SerializeField] private int _speed;
-        [SerializeField] private Transform _path;
-        [SerializeField] private Transform _startTargetPoint;
+        [SerializeField] private MonoBehaviour _inputSourceBehaviour;
+        [SerializeField] private Transform _startPosition;
 
-        private bool _startGame;
-        private int _transformRotation = 100;
-        private Transform[] _point;
-        private int _currentPoint;
+        public float _speed;
+        public CharacterController _characterController;
+        
+        private IInputBotService _inputService;
+        private float Epsilon = 0.001f;
         private Vector3 _currentMovement;
-
-        public Transform StartPlay => _startTargetPoint;
+        private bool _isMovedPressed;
+        private NavMeshAgent _agent;
+        private const float _minimalDistance = 0;
 
         private void Start()
         {
-            MovementToGame();
-            //transform.rotation = new Quaternion(0, _transformRotation, 0, 0);
+            //_agent.destination = _startPosition.position;
         }
 
+        private void Awake()
+        {
+            _inputService = (IInputBotService)_inputSourceBehaviour;
+            _agent = GetComponent<NavMeshAgent>();
+            //_inputService = AllServices.Container.Single<IInputService>();
+        }
+        
         private void Update()
         {
-            MovingStart();
-            //Movement();
+            //MovementInput();
+            MovementDirection();
         }
 
-        private void MovementToGame()
+        private void MovementDirection()
         {
-            _point = new Transform[_path.childCount];
-
-            for (int i = 0; i < _path.childCount; i++)
-            {
-                _point[i] = _path.GetChild(i);
-            }
+            var movement = new Vector3(_inputService.MoveInput.x, 0f, _inputService.MoveInput.y);
+            movement *= _speed;
+            _agent.SetDestination(movement);
         }
-
-        private void MovingStart()
+        
+        private void MovementInput()
         {
-            if (transform.position != _startTargetPoint.position)
-            {
-                transform.position = Vector3.MoveTowards(transform.position, _startTargetPoint.position, _speed * Time.deltaTime);
-                _startGame = false;
-            }
-            else
-            {
-                MovingAroundTheSite();
-            }
-        }
-
-        private void MovingAroundTheSite()
-        {
-            StartCoroutine(SwapPosition());
-            
-            Transform target = _point[_currentPoint];
-            transform.position = Vector3.MoveTowards(transform.position, target.position, _speed * Time.deltaTime);
-        }
-
-        private IEnumerator SwapPosition()
-        {
-            yield return new WaitForSeconds(5f);
-            
-            if (transform.position == _startTargetPoint.position)
-            {
-                _currentPoint = Random.Range(0, _point.Length);
-                
-                if (_currentPoint >= _point.Length)
-                {
-                    _currentPoint = 0;
-                }
-            }
+            var movement = new Vector3(_inputService.MoveInput.x, 0f, _inputService.MoveInput.y);
+            movement *= _speed;
+            _characterController.SimpleMove(movement);
         }
     }
 }

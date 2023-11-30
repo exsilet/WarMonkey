@@ -47,14 +47,5 @@ namespace Player
         {
             _weapon.Shoot(_shootPoint, _shootUI.PowerAttack);
         }
-
-        // private IEnumerator AttackPower()
-        // {
-        //     // foreach (var VARIABLE in COLLECTION)
-        //     // {
-        //     //     
-        //     // }
-        //     // yield return new WaitForSeconds(1f);
-        // }
     }
 }
