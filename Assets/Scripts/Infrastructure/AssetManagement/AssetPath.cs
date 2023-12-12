@@ -6,5 +6,6 @@
         public const string HudPath = "Hud/Hud";
         public const string HudMenuPath = "Hud/MenuHud";
         public const string SelectUnitsPath = "Hud/SelectUnits";
+        public const string Spawner = "Enemies/SpawnPoint";
     }
 }

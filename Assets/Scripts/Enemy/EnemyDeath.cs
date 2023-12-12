@@ -9,6 +9,7 @@ namespace Enemy
     {
         [SerializeField] private EnemyHealth _health;
         [SerializeField] private EnemyAnimator _animator;
+        [SerializeField] private CapsuleCollider _collider;
 
         public event Action Happened;
 
@@ -30,13 +31,12 @@ namespace Enemy
 
         private void Die()
         {
-            _health.HealthChanged -= OnHealthChanged;
-      
             _animator.PlayDeath();
+            _collider.enabled = false;
+            Happened?.Invoke();
 
             //StartCoroutine(DestroyTimer());
       
-            Happened?.Invoke();
         }
 
         private IEnumerator DestroyTimer()

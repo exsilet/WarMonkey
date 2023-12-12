@@ -40,7 +40,7 @@ namespace Infrastructure.State
         private PlayerProgress NewProgress()
         {            
             var progress =  new PlayerProgress(initialLevel: MenuScene);
-            progress.HeroState.ResetHP();
+            //progress.HeroState.ResetHP();
 
             return progress;
         }

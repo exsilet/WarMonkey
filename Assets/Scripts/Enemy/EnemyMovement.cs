@@ -8,46 +8,47 @@ namespace Enemy
         [SerializeField] private MonoBehaviour _inputSourceBehaviour;
         [SerializeField] private Transform _startPosition;
 
-        public float _speed;
-        public CharacterController _characterController;
-        
+        public float Speed;
         private IInputBotService _inputService;
         private float Epsilon = 0.001f;
         private Vector3 _currentMovement;
-        private bool _isMovedPressed;
+        private bool _isMovedPressed = true;
         private NavMeshAgent _agent;
         private const float _minimalDistance = 0;
-
-        private void Start()
-        {
-            //_agent.destination = _startPosition.position;
-        }
 
         private void Awake()
         {
             _inputService = (IInputBotService)_inputSourceBehaviour;
             _agent = GetComponent<NavMeshAgent>();
-            //_inputService = AllServices.Container.Single<IInputService>();
         }
         
         private void Update()
         {
-            //MovementInput();
-            MovementDirection();
+            if (_isMovedPressed)
+                StartMoving();
+            else
+                MovementDirection();
         }
 
         private void MovementDirection()
         {
             var movement = new Vector3(_inputService.MoveInput.x, 0f, _inputService.MoveInput.y);
-            movement *= _speed;
+            movement *= Speed;
             _agent.SetDestination(movement);
         }
         
-        private void MovementInput()
+        private void StartMoving()
         {
-            var movement = new Vector3(_inputService.MoveInput.x, 0f, _inputService.MoveInput.y);
-            movement *= _speed;
-            _characterController.SimpleMove(movement);
+            var movement = new Vector3(_startPosition.position.x, 0f, _startPosition.position.y);
+            movement *= Speed;
+            _agent.SetDestination(movement);
         }
+        
+        // private void MovementInput()
+        // {
+        //     var movement = new Vector3(_inputService.MoveInput.x, 0f, _inputService.MoveInput.y);
+        //     movement *= Speed;
+        //     _characterController.SimpleMove(movement);
+        // }
     }
 }

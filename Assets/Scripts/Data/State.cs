@@ -6,17 +6,15 @@ namespace Data
     public class State
     {
         public int GameLevel;
-        public int Difficult;
         public float CurrentHP;
         public float MaxHP;
+        public int CurrentNumberSpawners;
         public void ResetHP() => CurrentHP = MaxHP;
 
         public State()
         {
-            GameLevel = 0;
-            Difficult = 1;
-            CurrentHP = 5;
-            MaxHP = 5;
+            GameLevel = 1;
+            CurrentNumberSpawners = 3;
         }
     }
 }

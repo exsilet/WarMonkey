@@ -1,5 +1,4 @@
 ﻿using System;
-using Infrastructure.StaticData.Enemy;
 
 namespace Data
 {

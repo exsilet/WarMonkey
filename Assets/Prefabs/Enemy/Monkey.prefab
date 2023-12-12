@@ -2163,13 +2163,12 @@ GameObject:
   - component: {fileID: 7997180072316609712}
   - component: {fileID: 3386228018908117911}
   - component: {fileID: 50042722235292437}
-  - component: {fileID: 2287930761501367763}
   - component: {fileID: 8898118503194737979}
   - component: {fileID: 981633633116985551}
   - component: {fileID: 981633633116985537}
   - component: {fileID: 8423088650230182731}
   m_Layer: 7
-  m_Name: Enemy
+  m_Name: Monkey
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2307,21 +2306,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: {fileID: 7997180072316609712}
   _animator: {fileID: 3386228018908117911}
---- !u!114 &2287930761501367763
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5611454482447943199}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b04284c34304e41993448e1760fdd75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _weapon: {fileID: -7296604874899471650, guid: e81e76f30c4303748a549064703c0079, type: 3}
-  _shootPoint: {fileID: 5753999419278638635}
-  _enemyAnimator: {fileID: 3386228018908117911}
 --- !u!143 &8898118503194737979
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2366,7 +2350,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inputSourceBehaviour: {fileID: 981633633116985551}
   _startPosition: {fileID: 0}
-  _speed: 20
+  Speed: 0
   _characterController: {fileID: 8898118503194737979}
 --- !u!114 &8423088650230182731
 MonoBehaviour:

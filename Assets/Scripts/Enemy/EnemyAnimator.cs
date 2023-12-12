@@ -8,13 +8,13 @@ namespace Enemy
     {
         [SerializeField] public Animator _animator;
 
-        private static readonly int MoveHash = Animator.StringToHash("Walking");
-        private static readonly int AttackHash = Animator.StringToHash("AttackNormal");
-        private static readonly int ReleasingTheButtonHash = Animator.StringToHash("ReleasingTheButton");
-        private static readonly int HitHash = Animator.StringToHash("Hit");
-        private static readonly int DieHash = Animator.StringToHash("Die");
-        private static readonly int BlockingHash = Animator.StringToHash("Blocking");
-        private static readonly int ReviveHash = Animator.StringToHash("Revive");
+        private static readonly int Move = Animator.StringToHash("Walking");
+        private static readonly int Attack = Animator.StringToHash("AttackNormal");
+        private static readonly int ReleasingTheButton = Animator.StringToHash("ReleasingTheButton");
+        private static readonly int Hit = Animator.StringToHash("Hit");
+        private static readonly int Die = Animator.StringToHash("Die");
+        private static readonly int Blocking = Animator.StringToHash("Blocking");
+        private static readonly int Revive = Animator.StringToHash("Revive");
 
         private readonly int _idleStateHash = Animator.StringToHash("Idle");
         private readonly int _attackStateHash = Animator.StringToHash("Attack Normal");
@@ -29,12 +29,12 @@ namespace Enemy
 
         public AnimatorState State { get; private set; }
         public bool IsAttacking => State == AnimatorState.Attack;
-        public void PlayHit() => _animator.SetTrigger(HitHash);
-        public void PlayAttackButtonUp() => _animator.SetTrigger(ReleasingTheButtonHash);
-        public void PlayDeath() => _animator.SetTrigger(DieHash);
-        public void PlayAttack() => _animator.SetTrigger(AttackHash);
-        public void PlayRevive() => _animator.SetTrigger(ReviveHash);
-        public void PlayBlocking() => _animator.SetTrigger(BlockingHash);
+        public void PlayHit() => _animator.SetTrigger(Hit);
+        public void PlayAttackButtonUp() => _animator.SetTrigger(ReleasingTheButton);
+        public void PlayDeath() => _animator.SetTrigger(Die);
+        public void PlayAttack() => _animator.SetTrigger(Attack);
+        public void PlayRevive() => _animator.SetTrigger(Revive);
+        public void PlayBlocking() => _animator.SetTrigger(Blocking);
 
         public void EnteredState(int stateHash)
         {

@@ -5,6 +5,8 @@ using Infrastructure.LevelLogic;
 using Infrastructure.Service;
 using Infrastructure.Service.PersistentProgress;
 using Infrastructure.Service.SaveLoad;
+using Infrastructure.Service.StaticData;
+using Infrastructure.StaticData.Players;
 
 namespace Infrastructure.State
 {
@@ -25,7 +27,7 @@ namespace Infrastructure.State
                     services.Single<IPersistentProgressService>(),services.Single<ISaveLoadService>()),
 
                 [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, loadingCurtain, services.Single<IGameFactory>(),
-                    services.Single<IPersistentProgressService>()),
+                    services.Single<IPersistentProgressService>(), services.Single<IStaticDataService>()),
 
                 [typeof(GameLoopState)] = new GameLoopState(this),
             };
@@ -41,6 +43,12 @@ namespace Infrastructure.State
         {
             TState state = ChangeState<TState>();
             state.Enter(payload);
+        }
+        
+        public void Enter<TState, TPayload>(TPayload payload, HeroStaticData payload1) where TState : class, IPayloadedState1<TPayload, HeroStaticData>
+        {
+            TState state = ChangeState<TState>();
+            state.EnterThreeParameters(payload, payload1);
         }
 
         private TState ChangeState<TState>() where TState : class, IExitableState

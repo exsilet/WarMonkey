@@ -1,7 +1,6 @@
 ﻿using Data;
 using Enemy;
 using Infrastructure.Factory;
-using Infrastructure.Service;
 using Infrastructure.Service.SaveLoad;
 using Infrastructure.StaticData.Enemy;
 using UI.Element;
@@ -9,30 +8,23 @@ using UnityEngine;
 
 namespace Logic
 {
-    public class EnemySpawner : MonoBehaviour, ISavedProgress
+    public class SpawnPoint : MonoBehaviour, ISavedProgress
     {
         public EnemyTypeID EnemyTypeID;
-        private string _id;
-        private bool _slain;
         private IGameFactory _factory;
+        private bool _slain;
         private EnemyDeath _enemyDeath;
         private StartBattle _startBattle;
+        public string Id { get; set; }
 
-        private void Awake()
+        public void Construct(IGameFactory gameFactory)
         {
-            _id = GetComponent<UniqueId>().Id;
-            _factory = AllServices.Container.Single<IGameFactory>();
-        }
-
-
-        public void Construct(StartBattle startBattle)
-        {
-            _startBattle = startBattle;
+            _factory = gameFactory;
         }
 
         public void LoadProgress(PlayerProgress progress)
         {
-            if (progress.KillData.ClearSpawners.Contains(_id))
+            if (progress.KillData.ClearSpawners.Contains(Id))
                 _slain = true;
             else
                 Spawn();
@@ -49,14 +41,16 @@ namespace Logic
 
         private void Slay()
         {
-            _enemyDeath.Happened += Slay;
-            _slain = false;
+            if (_enemyDeath != null) 
+                _enemyDeath.Happened -= Slay;
+
+            _slain = true;
         }
 
         public void UpdateProgress(PlayerProgress progress)
         {
             if (_slain)
-                progress.KillData.ClearSpawners.Add(_id);
+                progress.KillData.ClearSpawners.Add(Id);
         }
     }
 }

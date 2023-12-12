@@ -4,7 +4,9 @@ using Infrastructure.AssetManagement;
 using Infrastructure.Service.SaveLoad;
 using Infrastructure.Service.StaticData;
 using Infrastructure.StaticData.Enemy;
+using Infrastructure.StaticData.Players;
 using Logic;
+using Player;
 using UnityEngine;
 
 namespace Infrastructure.Factory
@@ -31,20 +33,36 @@ namespace Infrastructure.Factory
             return selectUnits;
         }
 
-        public GameObject CreateHero(GameObject at)
+        public GameObject CreateHud()
         {
-            var hero = _assets.Instantiate(path: AssetPath.HeroPath, at: at.transform.position);
+            GameObject hud = _assets.Instantiate(AssetPath.HudPath);
+            RegisterProgressWatchers(hud);
+            return hud;
+        }
+
+        public GameObject CreateHero(HeroStaticData heroStaticData, Transform parent)
+        {
+            HeroStaticData heroData = _staticData.ForPlayer(heroStaticData.HeroTypeID);
+            GameObject hero = Object.Instantiate(heroData.Prefab, parent.position, Quaternion.identity, parent);
+
+            var health = hero.GetComponentInChildren<IHealth>();
+            health.Current = heroData.Hp;
+            health.Max = heroData.Hp;
+            var speed = hero.GetComponentInChildren<HeroMover>();
+            speed.Speed = heroData.Speed;
 
             RegisterProgressWatchers(hero);
 
             return hero;
         }
 
-        public GameObject CreateHud()
+        public void CreateSpawner(string spawnerId, Vector3 at, EnemyTypeID enemyTypeID)
         {
-            GameObject hud = _assets.Instantiate(AssetPath.HudPath);
-            RegisterProgressWatchers(hud);
-            return hud;
+            SpawnPoint spawner = InstantiateRegistered(AssetPath.Spawner, at).GetComponent<SpawnPoint>();
+      
+            spawner.Construct(this);
+            spawner.EnemyTypeID = enemyTypeID;
+            spawner.Id = spawnerId;
         }
 
         // public GameObject CreateDraggableItem()
@@ -68,6 +86,8 @@ namespace Infrastructure.Factory
             var health = enemy.GetComponentInChildren<IHealth>();
             health.Current = enemyData.Hp;
             health.Max = enemyData.Hp;
+            var enemySpeed = enemy.GetComponentInChildren<EnemyMovement>();
+            enemySpeed.Speed = enemyData.Speed;
         
             return enemy;
         }
@@ -76,6 +96,22 @@ namespace Infrastructure.Factory
         {            
             ProgressReaders.Clear();
             ProgressWriters.Clear();
+        }
+        
+        private GameObject InstantiateRegistered(string prefabPath, Vector3 at)
+        {
+            GameObject gameObject = _assets.Instantiate(path: prefabPath, at: at);
+            RegisterProgressWatchers(gameObject);
+
+            return gameObject;
+        }
+
+        private GameObject InstantiateRegistered(string prefabPath)
+        {
+            GameObject gameObject = _assets.Instantiate(path: prefabPath);
+            RegisterProgressWatchers(gameObject);
+
+            return gameObject;
         }
 
         public void Register(ISavedProgressReader progressReader)

@@ -6,7 +6,7 @@ namespace Enemy
 {
     public class EnemyMonkey : MonoBehaviour
     {
-        [SerializeField] private int _speed;
+        [SerializeField] private float _speed;
         [SerializeField] private Transform _startTargetPoint;
         [SerializeField] private float _timeStopAttack;
 

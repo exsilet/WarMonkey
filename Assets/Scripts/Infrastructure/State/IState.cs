@@ -9,6 +9,11 @@
     {
         void Enter(TPayload sceneName);
     }
+    
+    public interface IPayloadedState1<TPayload, TPayload1> : IExitableState
+    {
+        void EnterThreeParameters(TPayload payload, TPayload1 payload1);     
+    }    
   
     public interface IExitableState
     {

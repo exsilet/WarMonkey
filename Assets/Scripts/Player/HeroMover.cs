@@ -16,6 +16,12 @@ namespace Player
         private bool _isMovedPressed;
         private Camera _camera;
 
+        public float Speed
+        {
+            get => _speed;
+            set => _speed = value;
+        }
+
         private void Start()
         {
             _camera = Camera.main;
