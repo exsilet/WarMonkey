@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88b57ceaf5e546f09fd7b6362b3a91b3, type: 3}
+  m_Name: City
+  m_EditorClassIdentifier: 
+  LevelKey: City
+  EnemySpawners:
+  - Id: City_8ea9b249-fe5e-465e-bfef-be94ef7d9cf3
+    EnemyTypeID: 0
+    Position: {x: 4.8, y: 0.5, z: 30.14}
+  - Id: City_c5d78125-8ea4-4e99-8c7e-6a213f0bcf56
+    EnemyTypeID: 1
+    Position: {x: 5.9700003, y: 0.5, z: 23.62}
+  - Id: City_df04db8c-008d-4497-9d29-e9cc634601dd
+    EnemyTypeID: 2
+    Position: {x: 3.64, y: 0.5, z: 26.68}
+  - Id: City_16dccb55-e1cc-401b-a8d9-a9f996b07813
+    EnemyTypeID: 3
+    Position: {x: 5.9700003, y: 0.5, z: 27.900002}
+  - Id: City_fa7f373f-e7df-4d6d-bdcb-741d02903cc6
+    EnemyTypeID: 4
+    Position: {x: 4.6600003, y: 0.5, z: 25.95}
+  - Id: City_268fb51b-c01e-4e15-89ca-a454527298e2
+    EnemyTypeID: 5
+    Position: {x: 3.64, y: 0.5, z: 23.82}
+  - Id: City_74831953-4755-4b61-b6a5-fd232c12de03
+    EnemyTypeID: 6
+    Position: {x: 6.98, y: 0.5, z: 28.650002}
+  - Id: City_d5dae392-fa8c-468d-8c05-594f729532f7
+    EnemyTypeID: 7
+    Position: {x: 3.64, y: 0.5, z: 25.43}
+  - Id: City_f486bad2-6601-4319-abed-84ba6f4fcc1e
+    EnemyTypeID: 8
+    Position: {x: 2.33, y: 0.5, z: 29.060001}
+  - Id: City_97f8aa90-d563-4e7f-aeee-9e18c2e4dcc6
+    EnemyTypeID: 9
+    Position: {x: 4.6600003, y: 0.5, z: 28.860003}
+  - Id: City_9c9d435d-a742-40eb-807a-2c632cb30967
+    EnemyTypeID: 10
+    Position: {x: 7.2200003, y: 0.5, z: 24.36}
+  - Id: City_98f58192-ad48-482e-85d0-9b3d97a761e6
+    EnemyTypeID: 11
+    Position: {x: 8.29, y: 0.5, z: 25.02}
+  - Id: City_c393c620-caa5-4b2f-ba5a-8aa6476844bd
+    EnemyTypeID: 12
+    Position: {x: 2.46, y: 0.5, z: 24.710001}
+  - Id: City_25da8616-f95b-4712-bb8c-8980449f3322
+    EnemyTypeID: 13
+    Position: {x: 6.98, y: 0.5, z: 25.74}
+  - Id: City_45adec36-e911-4a9e-a5ab-b25476dfa465
+    EnemyTypeID: 14
+    Position: {x: 3.64, y: 0.5, z: 29.6}
+  - Id: City_30307e67-eb50-4016-96c7-5d3b13338b3a
+    EnemyTypeID: 15
+    Position: {x: 5.9700003, y: 0.5, z: 29.400002}
+  - Id: City_716b8e99-a4b6-4c10-8cf1-4e5211b524af
+    EnemyTypeID: 16
+    Position: {x: 8.29, y: 0.5, z: 27.69}
+  - Id: City_046189a5-8914-441b-adb1-e1290ca692cc
+    EnemyTypeID: 17
+    Position: {x: 8.29, y: 0.5, z: 26.27}
+  - Id: City_8a2a8e28-d218-4348-bbae-767e37d6a260
+    EnemyTypeID: 18
+    Position: {x: 3.64, y: 0.5, z: 28.1}
+  - Id: City_89957742-7949-487d-aaca-fe9155df8de5
+    EnemyTypeID: 19
+    Position: {x: 2.33, y: 0.5, z: 26.15}
+  - Id: City_1dd11ad3-3bba-4215-9d80-d3a9f210b168
+    EnemyTypeID: 20
+    Position: {x: 4.6600003, y: 0.5, z: 27.400002}
+  - Id: City_d063d30a-1f96-4e68-9052-89b4277fe2d4
+    EnemyTypeID: 21
+    Position: {x: 2.33, y: 0.5, z: 27.6}
+  - Id: City_a3a9b43d-3413-4936-9e96-08fe71f061ce
+    EnemyTypeID: 22
+    Position: {x: 5.9700003, y: 0.5, z: 26.480001}
+  - Id: City_4351b82a-1e43-477c-ac49-57c417d0ecfb
+    EnemyTypeID: 23
+    Position: {x: 8.29, y: 0.5, z: 23.41}
+  - Id: City_4beae832-fffb-42bf-b67c-d8e67e222733
+    EnemyTypeID: 24
+    Position: {x: 5.9700003, y: 0.5, z: 25.230001}
+  - Id: City_564fbad7-90e7-4afe-89d7-898af0284ce5
+    EnemyTypeID: 25
+    Position: {x: 8.29, y: 0.5, z: 29.19}
+  - Id: City_8e439976-7829-4f56-b72d-ca8a966551eb
+    EnemyTypeID: 26
+    Position: {x: 4.5600004, y: 0.5, z: 24.640001}
+  - Id: City_1b52b254-324a-4c17-be04-a86b617f7c7d
+    EnemyTypeID: 27
+    Position: {x: 6.98, y: 0.5, z: 27.19}

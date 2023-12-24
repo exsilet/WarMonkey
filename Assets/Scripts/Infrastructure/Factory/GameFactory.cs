@@ -29,14 +29,14 @@ namespace Infrastructure.Factory
 
         public GameObject CreateSelectUnits()
         {
-            var selectUnits = _assets.Instantiate(AssetPath.SelectUnitsPath);
+            var selectUnits = InstantiateRegistered(AssetPath.SelectUnitsPath);
             return selectUnits;
         }
 
         public GameObject CreateHud()
         {
-            GameObject hud = _assets.Instantiate(AssetPath.HudPath);
-            RegisterProgressWatchers(hud);
+            GameObject hud = InstantiateRegistered(AssetPath.HudPath);
+            
             return hud;
         }
 
@@ -56,13 +56,15 @@ namespace Infrastructure.Factory
             return hero;
         }
 
-        public void CreateSpawner(string spawnerId, Vector3 at, EnemyTypeID enemyTypeID)
+        public GameObject CreateSpawner(string spawnerId, Vector3 at, EnemyTypeID enemyTypeID)
         {
             SpawnPoint spawner = InstantiateRegistered(AssetPath.Spawner, at).GetComponent<SpawnPoint>();
       
             spawner.Construct(this);
             spawner.EnemyTypeID = enemyTypeID;
             spawner.Id = spawnerId;
+
+            return spawner.gameObject;
         }
 
         // public GameObject CreateDraggableItem()
@@ -73,8 +75,7 @@ namespace Infrastructure.Factory
 
         public GameObject CreateHudMenu()
         {
-            GameObject hudMenu = _assets.Instantiate(AssetPath.HudMenuPath);
-            RegisterProgressWatchers(hudMenu);
+            GameObject hudMenu = InstantiateRegistered(AssetPath.HudMenuPath);
             return hudMenu;
         }
 
@@ -88,6 +89,8 @@ namespace Infrastructure.Factory
             health.Max = enemyData.Hp;
             var enemySpeed = enemy.GetComponentInChildren<EnemyMovement>();
             enemySpeed.Speed = enemyData.Speed;
+            var enemyMoney = enemy.GetComponentInChildren<LootEnemy>();
+            enemyMoney.Money = enemyData.Reward;
         
             return enemy;
         }

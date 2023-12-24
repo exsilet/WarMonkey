@@ -1,7 +1,6 @@
-﻿using Infrastructure.Factory;
-using Infrastructure.Service;
-using Infrastructure.Service.SaveLoad;
-using Infrastructure.State;
+﻿using System;
+using System.Collections.Generic;
+using Player;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,31 +8,49 @@ namespace UI.Element
 {
     public class EndGame : MonoBehaviour
     {
-        [SerializeField] private Button _button;
+        [SerializeField] private RewardCalculation _reward;
+        [SerializeField] private Image _rewardEndWindow;
+        [SerializeField] private ActorUI _actor;
 
-        public string TransferTo;
+        private List<GameObject> _players = new();
+        private int _playerKilled;
+        private int _maxPlayers;
+        private HeroDeath _currentPlayer;
 
-        private IGameStateMachine _stateMachine;
-        private IGameFactory _gameFactory;
-        private ISaveLoadService _saveLoadService;
-
-        private void Awake()
+        public void Construct(GameObject hero, int maxPlayers)
         {
-            _stateMachine = AllServices.Container.Single<IGameStateMachine>();
-            _saveLoadService = AllServices.Container.Single<ISaveLoadService>();
-            _gameFactory = AllServices.Container.Single<IGameFactory>();
+            _players.Add(hero);
+            _maxPlayers = maxPlayers;
         }
 
-        public void ClickMenu()
+        private void Start()
         {
-            _saveLoadService.ResetProgress();
-            _stateMachine.Enter<LoadProgressState>();
+            foreach (GameObject player in _players)
+            {
+                _currentPlayer = player.GetComponent<HeroDeath>();
+                _currentPlayer.SlainPlayer += Slained;
+            }
         }
 
-        public void OpenPanel(GameObject panel)
-            => panel.SetActive(true);
+        public void OnDestroy()
+        {
+            foreach (GameObject player in _players)
+            {
+                _currentPlayer = player.GetComponent<HeroDeath>();
+                _currentPlayer.SlainPlayer -= Slained;
+            }
+        }
 
-        public void ClosePanel(GameObject panel)
-            => panel.SetActive(false);
+        private void Slained(int playerKilled)
+        {
+            _playerKilled += playerKilled;
+            
+            if (_playerKilled == _maxPlayers)
+            {
+                _actor.GetRewardEnemy();
+                _reward.EndGameReward();
+                _rewardEndWindow.gameObject.SetActive(true);
+            }
+        }
     }
 }

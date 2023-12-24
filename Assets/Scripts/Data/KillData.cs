@@ -6,6 +6,6 @@ namespace Data
     [Serializable]
     public class KillData
     {
-        public List<string> ClearSpawners = new();
+        public List<string> ClearedSpawners = new();
     }
 }

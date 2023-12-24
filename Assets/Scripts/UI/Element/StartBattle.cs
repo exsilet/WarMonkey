@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using Infrastructure.Service;
+using Infrastructure.Service.SaveLoad;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace UI.Element
@@ -9,6 +12,7 @@ namespace UI.Element
         
         public bool CurrentStartBattle => _startGame;
         private bool _startGame = false;
+        private int _sceneIndex;
 
         private void OnEnable()
         {

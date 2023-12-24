@@ -8,6 +8,7 @@ TagManager:
   - Collide
   - InitialPoint
   - EnemySpawner
+  - SpawnerController
   layers:
   - Default
   - TransparentFX

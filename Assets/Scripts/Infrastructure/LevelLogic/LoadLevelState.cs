@@ -1,11 +1,9 @@
-using System.Collections.Generic;
 using Infrastructure.Factory;
 using Infrastructure.Service.PersistentProgress;
 using Infrastructure.Service.SaveLoad;
 using Infrastructure.Service.StaticData;
 using Infrastructure.State;
 using Infrastructure.StaticData.Players;
-using Logic;
 using Player;
 using UI.Element;
 using UnityEngine;
@@ -41,6 +39,7 @@ namespace Infrastructure.LevelLogic
         {
             _heroStaticData = heroData;
             _loadingCurtain.Show();
+            _gameFactory.Cleanup();
             _sceneLoader.Load(sceneName, OnLoaded);
         }
 
@@ -58,7 +57,7 @@ namespace Infrastructure.LevelLogic
         private void InitGameWorld()
         {
             GameObject hud = _gameFactory.CreateHud();
-            
+
             InitSpawners(hud);
             
             GameObject selectedUnits = _gameFactory.CreateSelectUnits();
@@ -67,29 +66,29 @@ namespace Infrastructure.LevelLogic
             {
                 GameObject hero = _gameFactory.CreateHero(_heroStaticData, player.transform);
                 selectedUnits.GetComponent<SelectUnit>().Construct(hero.GetComponent<Selectable>());
+                hud.GetComponent<EndGame>().Construct(hero, GameObject.FindGameObjectsWithTag(InitialPointTag).Length);
             }
             
-            InitHud();
+            InitHud(hud);
         }
 
-        private void InitSpawners(GameObject hudBattle)
+        private void InitSpawners(GameObject hud)
         {
-            // foreach (GameObject spawnerObject in GameObject.FindGameObjectsWithTag("EnemySpawner"))
-            // {
-            //     var spawner = spawnerObject.GetComponent<SpawnPoint>();
-            //     _gameFactory.Register(spawner);
-            // }
-            
-            string sceneKey = _progressService.Progress.HeroState.GameLevel.ToString();
+            //string sceneKey = _progressService.Progress.HeroState.GameLevel.ToString();
+            string sceneKey = SceneManager.GetActiveScene().name;
             LevelStaticData levelData = _staticData.ForLevel(sceneKey);
-      
-            foreach (EnemySpawnerStaticData spawnerData in levelData.EnemySpawners)
-                _gameFactory.CreateSpawner(spawnerData.Id, spawnerData.Position, spawnerData.EnemyTypeID);
+            int monsterQuantity = _progressService.Progress.WorldData.MonsterQuantity;
+
+            for (int i = 0; i < monsterQuantity; i++)
+            {
+                GameObject spawner = _gameFactory.CreateSpawner(levelData.EnemySpawners[i].Id, levelData.EnemySpawners[i].Position, levelData.EnemySpawners[i].EnemyTypeID);
+                hud.GetComponentInChildren<ActorUI>().Construct(spawner, monsterQuantity);
+            }
         }
 
-        private void InitHud()
+        private void InitHud(GameObject hud)
         {
-            //hud.GetComponentInChildren<ActorUI>().Construct(hero.GetComponent<Hero>(),hero.GetComponent<HeroHealth>(), hero.GetComponent<CastSpell>());
+            
         }
 
         private void InformProgressReaders()

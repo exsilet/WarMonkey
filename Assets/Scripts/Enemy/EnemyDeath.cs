@@ -34,9 +34,8 @@ namespace Enemy
             _animator.PlayDeath();
             _collider.enabled = false;
             Happened?.Invoke();
-
+            
             //StartCoroutine(DestroyTimer());
-      
         }
 
         private IEnumerator DestroyTimer()

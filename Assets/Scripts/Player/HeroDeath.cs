@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Player
 {
@@ -9,6 +10,10 @@ namespace Player
         [SerializeField] private HeroHealth _health;
         [SerializeField] private HeroAnimator _animator;
 
+        private int _playerKilled;
+        
+        public UnityAction<int> SlainPlayer;
+        
         private void Start()
         {
             _health.HealthChanged += OnHealthChanged;
@@ -30,7 +35,8 @@ namespace Player
             _health.HealthChanged -= OnHealthChanged;
       
             _animator.PlayDeath();
-
+            _playerKilled++;
+            SlainPlayer?.Invoke(_playerKilled);
             StartCoroutine(DestroyTimer());
         }
 

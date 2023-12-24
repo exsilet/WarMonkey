@@ -5,6 +5,7 @@ using Infrastructure.Service.SaveLoad;
 using Infrastructure.StaticData.Enemy;
 using UI.Element;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Logic
 {
@@ -13,8 +14,12 @@ namespace Logic
         public EnemyTypeID EnemyTypeID;
         private IGameFactory _factory;
         private bool _slain;
+        private int _enemyKilled;
         private EnemyDeath _enemyDeath;
         private StartBattle _startBattle;
+
+        public bool Slain => _slain;
+        public UnityAction<int> Slained;
         public string Id { get; set; }
 
         public void Construct(IGameFactory gameFactory)
@@ -24,12 +29,17 @@ namespace Logic
 
         public void LoadProgress(PlayerProgress progress)
         {
-            if (progress.KillData.ClearSpawners.Contains(Id))
+            if (progress.KillData.ClearedSpawners.Contains(Id))
                 _slain = true;
             else
                 Spawn();
         }
-
+        
+        private void OnDestroy()
+        {
+            if (_enemyDeath != null)
+                _enemyDeath.Happened -= Slay;
+        }
 
         private void Spawn()
         {
@@ -45,12 +55,16 @@ namespace Logic
                 _enemyDeath.Happened -= Slay;
 
             _slain = true;
+            _enemyKilled++;
+            Slained?.Invoke(_enemyKilled);
         }
 
         public void UpdateProgress(PlayerProgress progress)
         {
-            if (_slain)
-                progress.KillData.ClearSpawners.Add(Id);
+            // List<string> slainSpawnersList = progress.KillData.ClearedSpawners;
+            //
+            // if(_slain && !slainSpawnersList.Contains(Id))
+            //     slainSpawnersList.Add(Id);
         }
     }
 }

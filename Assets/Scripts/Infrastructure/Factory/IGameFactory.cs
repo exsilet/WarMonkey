@@ -14,7 +14,7 @@ namespace Infrastructure.Factory
         GameObject CreateHud();
         GameObject CreateHudMenu();
         GameObject CreatEnemy(EnemyTypeID typeId, Transform parent);
-        public void CreateSpawner(string spawnerId, Vector3 at, EnemyTypeID enemyTypeID);
+        public GameObject CreateSpawner(string spawnerId, Vector3 at, EnemyTypeID enemyTypeID);
         List<ISavedProgressReader> ProgressReaders { get; }
         List<ISavedProgress> ProgressWriters { get; }
         void Register(ISavedProgressReader savedProgress);

@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88b57ceaf5e546f09fd7b6362b3a91b3, type: 3}
+  m_Name: Police
+  m_EditorClassIdentifier: 
+  LevelKey: Police
+  EnemySpawners:
+  - Id: Police_85c3eeb8-3e12-4c14-8373-f77a88ae8830
+    EnemyTypeID: 0
+    Position: {x: 8.29, y: 0.5, z: 23.41}
+  - Id: Police_8f605e84-09fb-441b-b60f-2878ca03fdca
+    EnemyTypeID: 1
+    Position: {x: 6.32, y: 0.5, z: 27.2}
+  - Id: Police_8086e1d9-1f9a-43a2-b345-fc37cfdc6212
+    EnemyTypeID: 2
+    Position: {x: 10.24, y: 0.5, z: 23.28}
+  - Id: Police_7495c480-3396-4bcd-853d-3193c60c284e
+    EnemyTypeID: 3
+    Position: {x: 8.610001, y: 0.5, z: 28.91}
+  - Id: Police_34d807cf-01b0-42fe-ad7c-c572d2edf2ca
+    EnemyTypeID: 4
+    Position: {x: 5.36, y: 0.5, z: 30.060001}
+  - Id: Police_0c659116-22ca-4939-88fc-df445fc99d14
+    EnemyTypeID: 5
+    Position: {x: 4.26, y: 0.5, z: 29.16}
+  - Id: Police_03998e20-1c2d-4d21-b08a-53aa1133964c
+    EnemyTypeID: 6
+    Position: {x: 7.4500003, y: 0.5, z: 28.02}
+  - Id: Police_e94d3c44-0420-41a5-913c-bd14cac66bd4
+    EnemyTypeID: 7
+    Position: {x: 9.89, y: 0.5, z: 29.83}
+  - Id: Police_7a845868-aa97-4dd2-ae1d-0f1e7cbe2f8c
+    EnemyTypeID: 8
+    Position: {x: 10.59, y: 0.5, z: 26.91}
+  - Id: Police_4e6cfcbd-e311-4aba-940f-9d09565c45fb
+    EnemyTypeID: 9
+    Position: {x: 5.9700003, y: 0.5, z: 23.62}
+  - Id: Police_b0f6466c-b0fa-4c04-8085-bc51cbb6cd5b
+    EnemyTypeID: 10
+    Position: {x: 6.21, y: 0.5, z: 25.460001}
+  - Id: Police_c9a03b14-5c4e-42e2-98c8-a05f16171b47
+    EnemyTypeID: 11
+    Position: {x: 2.7500002, y: 0.5, z: 25.710001}
+  - Id: Police_7117ae77-39ce-4648-a81a-e5c70e01f454
+    EnemyTypeID: 12
+    Position: {x: 3.1200001, y: 0.5, z: 29.25}
+  - Id: Police_ff7b76b5-8685-4f8a-8ca3-1038fedafcfb
+    EnemyTypeID: 13
+    Position: {x: 2.66, y: 0.5, z: 23.91}
+  - Id: Police_d3831c53-03db-4ce3-b97e-f58dbd599b84
+    EnemyTypeID: 14
+    Position: {x: 9.65, y: 0.5, z: 27.99}
+  - Id: Police_227de440-3814-440f-996d-087da51f0dee
+    EnemyTypeID: 15
+    Position: {x: 8.43, y: 0.5, z: 30.53}
+  - Id: Police_fa4f616e-610d-4765-a993-684e2d8f3dbf
+    EnemyTypeID: 16
+    Position: {x: 8.29, y: 0.5, z: 25.25}
+  - Id: Police_7139b8a9-0ce0-4920-a5b6-25dbc2d2978c
+    EnemyTypeID: 17
+    Position: {x: 5.1800003, y: 0.5, z: 26.49}
+  - Id: Police_fa523e77-a547-444b-a5e0-60064811be8d
+    EnemyTypeID: 18
+    Position: {x: 3.64, y: 0.5, z: 23.82}
+  - Id: Police_0e8f6bb7-eaee-4f9c-a590-e11ee1298255
+    EnemyTypeID: 19
+    Position: {x: 10.85, y: 0.5, z: 28.77}
+  - Id: Police_86adfcb1-71b0-42b9-82cf-da52a89acac2
+    EnemyTypeID: 20
+    Position: {x: 6.36, y: 0.5, z: 28.970001}
+  - Id: Police_4c2eff6f-92c2-4367-a3d8-2ae0ffa961ff
+    EnemyTypeID: 21
+    Position: {x: 8.42, y: 0.5, z: 27.07}
+  - Id: Police_0f7092fd-500d-45e3-9b16-349a48d6fc0b
+    EnemyTypeID: 22
+    Position: {x: 4.1000004, y: 0.5, z: 27.390001}
+  - Id: Police_15af77b9-b72a-45cb-adbe-2019ac0d9f5a
+    EnemyTypeID: 23
+    Position: {x: 7.3100004, y: 0.5, z: 29.85}
+  - Id: Police_07f5c0cc-f6ae-4cf0-a885-4180bdbf2564
+    EnemyTypeID: 24
+    Position: {x: 2.9800003, y: 0.5, z: 27.48}
+  - Id: Police_4802bdbf-5a7b-45c4-abcd-844c8547ca26
+    EnemyTypeID: 25
+    Position: {x: 10.37, y: 0.5, z: 25.08}
+  - Id: Police_c2930645-6606-4a20-a7cc-5d4b617ca2eb
+    EnemyTypeID: 26
+    Position: {x: 3.8700001, y: 0.5, z: 25.560001}
+  - Id: Police_8a5b58c8-ae04-43ef-bd52-f662386d0b31
+    EnemyTypeID: 27
+    Position: {x: 5.3700004, y: 0.5, z: 28.17}
