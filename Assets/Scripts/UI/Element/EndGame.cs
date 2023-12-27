@@ -36,6 +36,8 @@ namespace UI.Element
         {
             foreach (GameObject player in _players)
             {
+                if (player == null) continue;
+                
                 _currentPlayer = player.GetComponent<HeroDeath>();
                 _currentPlayer.SlainPlayer -= Slained;
             }

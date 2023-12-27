@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Data;
 using Enemy;
-using Infrastructure.Service;
 using Infrastructure.Service.SaveLoad;
 using Logic;
 using UnityEngine;
@@ -77,17 +76,13 @@ namespace UI.Element
         public void LoadProgress(PlayerProgress progress)
         {
             _monsterQuantity = progress.WorldData.MonsterQuantity;
-            Debug.Log(_monsterQuantity + " kolu4ectvo monsctrod load");
             _gameLevel = progress.WorldData.CurrentLevels;
-            Debug.Log(_gameLevel + " kolu4ectvo monsctrod load");
         }
 
         public void UpdateProgress(PlayerProgress progress)
         {
             progress.WorldData.MonsterQuantity = _monsterQuantity;
-            Debug.Log(_monsterQuantity + " kolu4ectvo monsctrod save");
             progress.WorldData.CurrentLevels = _gameLevel;
-            Debug.Log(_gameLevel + " kolu4ectvo monsctrod save");
         }
 
         private void CompleteLevel()

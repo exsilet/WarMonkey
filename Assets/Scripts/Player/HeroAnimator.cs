@@ -6,8 +6,6 @@ namespace Player
 {
     public class HeroAnimator : MonoBehaviour, IAnimationStateReader
     {
-        [SerializeField] private CharacterController _characterController;
-        
         private static readonly int Move = Animator.StringToHash("Walking");
         private static readonly int Attack = Animator.StringToHash("AttackNormal");
         private static readonly int ReleasingTheButton = Animator.StringToHash("ReleasingTheButton");

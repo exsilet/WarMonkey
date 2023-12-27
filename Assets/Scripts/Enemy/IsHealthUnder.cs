@@ -5,7 +5,7 @@ namespace Enemy
 {
     public class IsHealthUnder : Action
     {
-        private SharedInt HealthTreshold;
+        public SharedInt HealthTreshold;
         public EnemyHealth EnemyHealth;
 
         public override TaskStatus OnUpdate()

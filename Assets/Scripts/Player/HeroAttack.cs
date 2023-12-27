@@ -24,23 +24,38 @@ namespace Player
 
         private void Update()
         {
-            if (_selectable.Selected)
-            {
-                if (_input.IsAttackButtonUp())
-                {
-                    _heroAnimator.PlayAttack();
-                    _canShoot = true;
-                    _shootUI.CanSHoot(_canShoot);
-                }
-            
-                if (Input.GetMouseButtonUp(0))
-                {
-                    _heroAnimator.PlayAttackButtonUp();
-                    _canShoot = false;
-                    _shootUI.CanSHoot(_canShoot);
-                    OnAttack();
-                }
-            }
+            // if (_selectable.Selected)
+            // {
+            //     if (Input.GetMouseButtonDown(0))
+            //     {
+            //         _heroAnimator.PlayAttack();
+            //         _canShoot = true;
+            //         _shootUI.CanSHoot(_canShoot);
+            //     }
+            //
+            //     if (Input.GetMouseButtonUp(0))
+            //     {
+            //         _heroAnimator.PlayAttackButtonUp();
+            //         _canShoot = false;
+            //         _shootUI.CanSHoot(_canShoot);
+            //         OnAttack();
+            //     }
+            // }
+        }
+
+        public void StartAttack()
+        {
+            _heroAnimator.PlayAttack();
+            _canShoot = true;
+            _shootUI.CanSHoot(_canShoot);
+        }
+
+        public void ShootAttack()
+        {
+            _heroAnimator.PlayAttackButtonUp();
+            _canShoot = false;
+            _shootUI.CanSHoot(_canShoot);
+            OnAttack();
         }
 
         private void OnAttack()

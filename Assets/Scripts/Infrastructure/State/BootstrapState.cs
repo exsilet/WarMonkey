@@ -37,7 +37,6 @@ namespace Infrastructure.State
 
         private void RegisterServices()
         {
-            _services.RegisterSingle<IInputService>(InputService());
             RegisterStaticData();
             
             _services.RegisterSingle<IGameStateMachine>(_stateMachine);
@@ -62,14 +61,6 @@ namespace Infrastructure.State
         private void EnterLoadLevel()
         {
             _stateMachine.Enter<LoadProgressState>();
-        }
-        
-        private static IInputService InputService()
-        {
-            if (Application.isEditor)
-                return new StandaloneInputService();
-            else
-                return new MobileInputService();
         }
     }
 }

@@ -40,7 +40,7 @@ namespace Enemy
 
         private IEnumerator DestroyTimer()
         {
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(2);
             Destroy(gameObject);
         }
     }
