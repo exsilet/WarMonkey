@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3726f053161ff24592b54f4dd8d04ba, type: 3}
   m_Name: EnemyShok 5
   m_EditorClassIdentifier: 
-  Hp: 6
+  Hp: 12
   Damage: 1
   Cooldown: 2
   Speed: 3
   Reward: 10
   UIIcon: {fileID: 0}
-  Prefab: {fileID: 2606271537249916829, guid: 84163bd0160b15642b58723f46ddd509, type: 3}
+  Prefab: {fileID: 2606271537249916829, guid: 89e2f5650c2e42a41a9704c8585e0f70, type: 3}
   EnemyTypeID: 27

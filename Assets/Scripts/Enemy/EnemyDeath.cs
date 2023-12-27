@@ -23,6 +23,16 @@ namespace Enemy
             _health.HealthChanged -= OnHealthChanged;
         }
 
+        public void ColliderEnable()
+        {
+            _collider.enabled = false;
+        }
+
+        public void ColliderActive()
+        {
+            _collider.enabled = true;
+        }
+
         private void OnHealthChanged()
         {
             if (_health.Current <= 0)
@@ -31,8 +41,6 @@ namespace Enemy
 
         private void Die()
         {
-            _animator.PlayDeath();
-            _collider.enabled = false;
             Happened?.Invoke();
             
             //StartCoroutine(DestroyTimer());
