@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections;
+using System.Globalization;
 using Infrastructure.Service;
 using Infrastructure.Service.SaveLoad;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,25 +11,43 @@ namespace UI.Element
 {
     public class StartBattle : MonoBehaviour
     {
-        [SerializeField] private Button _startButton;
-        
+        [SerializeField] private GameObject _uiTimer;
+        [SerializeField] private float _timerStart;
+        [SerializeField] private TMP_Text _textTimer;
+
         public bool CurrentStartBattle => _startGame;
-        private bool _startGame = false;
+        private bool _startGame;
         private int _sceneIndex;
+        private float _timer;
 
-        private void OnEnable()
+        private void Start()
         {
-            _startButton.onClick.AddListener(StartGame);
+            _timer = _timerStart;
+            _textTimer.text = _textTimer.ToString();
+            _uiTimer.SetActive(true);
+            _startGame = false;
+            
+            StartCoroutine(StartTime());
         }
 
-        private void OnDisable()
+        private IEnumerator StartTime()
         {
-            _startButton.onClick.RemoveListener(StartGame);
-        }
+            while (_timerStart >= 0)
+            {
+                _textTimer.text = $"{_timerStart / 60}";
+                _textTimer.text = _timerStart.ToString(CultureInfo.CurrentCulture);
+                _timerStart--;
+                yield return new WaitForSeconds(1.1f);
+            }
 
-        private void StartGame()
+            OnEndTimer();
+        }
+        
+        private void OnEndTimer()
         {
+            StopCoroutine(StartTime());
             _startGame = true;
-        }
+            _uiTimer.SetActive(false);
+        }    
     }
 }

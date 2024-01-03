@@ -8,19 +8,17 @@ namespace Enemy
     {
         [SerializeField] public Animator _animator;
 
-        private static readonly int Move = Animator.StringToHash("Walking");
+        private static readonly int IsMoving = Animator.StringToHash("IsMoving");
         private static readonly int Attack = Animator.StringToHash("AttackNormal");
         private static readonly int ReleasingTheButton = Animator.StringToHash("ReleasingTheButton");
         private static readonly int Hit = Animator.StringToHash("Hit");
         private static readonly int Die = Animator.StringToHash("Die");
-        private static readonly int Blocking = Animator.StringToHash("Blocking");
         private static readonly int Revive = Animator.StringToHash("Revive");
 
         private readonly int _idleStateHash = Animator.StringToHash("Idle");
         private readonly int _attackStateHash = Animator.StringToHash("Attack Normal");
         private readonly int _releasingTheButtonStateHash = Animator.StringToHash("Releasing The Button");
-        private readonly int _walkingStateHash = Animator.StringToHash("Run");
-        private readonly int _blockingStateHash = Animator.StringToHash("Blocking");
+        private readonly int _walkingStateHash = Animator.StringToHash("Move");
         private readonly int _reviveStateHash = Animator.StringToHash("Revive");
         private readonly int _deathStateHash = Animator.StringToHash("Die");
 
@@ -30,11 +28,16 @@ namespace Enemy
         public AnimatorState State { get; private set; }
         public bool IsAttacking => State == AnimatorState.Attack;
         public void PlayHit() => _animator.SetTrigger(Hit);
+        public void Move()
+        {
+            _animator.SetBool(IsMoving, true);
+        }
+
+        public void StopMoving() => _animator.SetBool(IsMoving, false);
         public void PlayAttackButtonUp() => _animator.SetTrigger(ReleasingTheButton);
         public void PlayDeath() => _animator.SetTrigger(Die);
         public void PlayAttack() => _animator.SetTrigger(Attack);
         public void PlayRevive() => _animator.SetTrigger(Revive);
-        public void PlayBlocking() => _animator.SetTrigger(Blocking);
 
         public void EnteredState(int stateHash)
         {
@@ -69,10 +72,6 @@ namespace Enemy
             else if (stateHash == _deathStateHash)
             {
                 state = AnimatorState.Died;
-            }
-            else if (stateHash == _blockingStateHash)
-            {
-                state = AnimatorState.Block;
             }
             else if (stateHash == _reviveStateHash)
             {

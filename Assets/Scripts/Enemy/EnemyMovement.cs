@@ -6,6 +6,7 @@ namespace Enemy
     public class EnemyMovement : MonoBehaviour
     {
         [SerializeField] private MonoBehaviour _inputSourceBehaviour;
+        [SerializeField] private EnemyAnimator _enemyAnimator;
 
         public float Speed;
         private IInputBotService _inputService;

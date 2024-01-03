@@ -39,7 +39,6 @@ namespace Infrastructure.Service.SaveLoad
             PlayerPrefs.Save();
             _gameFactory.ProgressWriters.Clear();
             _gameFactory.ProgressReaders.Clear();
-            Debug.Log("ClearProgress");
         }
     }    
 }

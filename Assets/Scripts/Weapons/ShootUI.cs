@@ -10,6 +10,7 @@ namespace Weapons
         private float _currentPowerAttack;
         private bool _canShoot;
         private float _maxPowerAttack = 1f;
+        private float _speedFilling = 2f;
 
         public float PowerAttack => _currentPowerAttack;
 
@@ -24,14 +25,14 @@ namespace Weapons
             if (_canShoot)
             {
                 _powerAttack.gameObject.SetActive(true);
-                
+
                 if (_currentPowerAttack != _powerAttack.maxValue)
                 {
-                    _currentPowerAttack += Time.deltaTime;
+                    _currentPowerAttack += Time.deltaTime * _speedFilling;
                 }
-                
-                _powerAttack.value = _currentPowerAttack == _maxPowerAttack ? _powerAttack.maxValue : _currentPowerAttack;
 
+                _powerAttack.value =
+                    _currentPowerAttack == _maxPowerAttack ? _powerAttack.maxValue : _currentPowerAttack;
             }
             else
             {

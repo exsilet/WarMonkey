@@ -18,5 +18,5 @@ MonoBehaviour:
   Speed: 3
   Reward: 10
   UIIcon: {fileID: 0}
-  Prefab: {fileID: 2606271537249916829, guid: 2c2a0db9611040643b707787a380e158, type: 3}
+  Prefab: {fileID: 2606271537249916829, guid: 90ed132397db35142ab2316328015261, type: 3}
   EnemyTypeID: 21

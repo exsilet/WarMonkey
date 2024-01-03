@@ -6,7 +6,6 @@ namespace Player
 {
     public class HeroAnimator : MonoBehaviour, IAnimationStateReader
     {
-        private static readonly int Move = Animator.StringToHash("Walking");
         private static readonly int Attack = Animator.StringToHash("AttackNormal");
         private static readonly int ReleasingTheButton = Animator.StringToHash("ReleasingTheButton");
         private static readonly int Hit = Animator.StringToHash("Hit");
@@ -17,7 +16,6 @@ namespace Player
         private readonly int _idleStateHash = Animator.StringToHash("Idle");
         private readonly int _attackStateHash = Animator.StringToHash("Attack Normal");
         private readonly int _releasingTheButtonStateHash = Animator.StringToHash("Releasing The Button");
-        private readonly int _walkingStateHash = Animator.StringToHash("Run");
         private readonly int _blockingStateHash = Animator.StringToHash("Blocking");
         private readonly int _reviveStateHash = Animator.StringToHash("Revive");
         private readonly int _deathStateHash = Animator.StringToHash("Die");
@@ -60,10 +58,6 @@ namespace Player
             else if (stateHash == _attackStateHash)
             {
                 state = AnimatorState.Attack;
-            }
-            else if (stateHash == _walkingStateHash)
-            {
-                state = AnimatorState.Walking;
             }
             else if (stateHash == _deathStateHash)
             {

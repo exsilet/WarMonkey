@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UI.Element;
 using UnityEngine;
 
 namespace Player
@@ -9,11 +10,10 @@ namespace Player
         [SerializeField] private LayerMask _layerMask;
 
         public Selectable CurrentSelectable;
-        public HeroMover Hero;
 
         private GameObject _selectedObject;
         private HeroAttack _heroAttack;
-        private HeroMover _heroMover;
+        private StartBattle _startBattle;
 
         private Selectable _selectable;
         private bool _selecting;
@@ -25,9 +25,10 @@ namespace Player
         private List<Selectable> _units = new();
         private Ray TouchRay => _camera.ScreenPointToRay(Input.mousePosition);
 
-        public void Construct(Selectable selectable)
+        public void Construct(Selectable selectable, StartBattle startBattle)
         {
             _selectable = selectable;
+            _startBattle = startBattle;
             AddUnits();
         }
 
@@ -35,27 +36,27 @@ namespace Player
 
         private void Update()
         {
-            DragObject();
+            if (_startBattle.CurrentStartBattle)
+            {
+                DragObject();
             
-            if (Input.GetMouseButtonDown(0))
-            {
-                SingleSelect();
-            }
-
-            if (Input.GetMouseButtonUp(0))
-            {
-                if (_heroAttack != null)
+                if (Input.GetMouseButtonDown(0))
                 {
-                    _heroAttack.ShootAttack();
-                    _heroAttack = null;
-                    _selectedObject.GetComponent<Rigidbody>().useGravity = true;
-                    _selectedObject = null;
-                    _heroMover = null;
-                    CurrentSelectable = null;
+                    SingleSelect();
+                }
+
+                if (Input.GetMouseButtonUp(0))
+                {
+                    if (_heroAttack != null)
+                    {
+                        _heroAttack.ShootAttack();
+                        _heroAttack = null;
+                        _selectedObject.GetComponent<Rigidbody>().useGravity = true;
+                        _selectedObject = null;
+                        CurrentSelectable = null;
+                    }
                 }
             }
-            
-            Debug.DrawRay(_camera.transform.position, _camera.transform.forward * 100f, Color.blue);
         }
 
         private void AddUnits()
@@ -79,8 +80,6 @@ namespace Player
             Vector2 clickPosition = _camera.ScreenToWorldPoint(Input.mousePosition);
             if (Physics.Raycast(TouchRay, out var hit))
             {
-                Debug.Log(hit.collider + " select");
-
                 if (hit.collider != null)
                 {
                     if (hit.collider.gameObject.GetComponent<Selectable>())

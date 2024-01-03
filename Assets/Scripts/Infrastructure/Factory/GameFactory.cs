@@ -48,8 +48,6 @@ namespace Infrastructure.Factory
             var health = hero.GetComponentInChildren<IHealth>();
             health.Current = heroData.Hp;
             health.Max = heroData.Hp;
-            var speed = hero.GetComponentInChildren<HeroMover>();
-            speed.Speed = heroData.Speed;
 
             RegisterProgressWatchers(hero);
 
@@ -66,12 +64,6 @@ namespace Infrastructure.Factory
 
             return spawner.gameObject;
         }
-
-        // public GameObject CreateDraggableItem()
-        // {
-        //     var draggableItem = _assets.Instantiate(AssetPath.DraggableItemPath);
-        //     return draggableItem;
-        // }
 
         public GameObject CreateHudMenu()
         {

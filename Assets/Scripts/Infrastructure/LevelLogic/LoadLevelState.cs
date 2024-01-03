@@ -65,7 +65,7 @@ namespace Infrastructure.LevelLogic
             foreach (GameObject player in GameObject.FindGameObjectsWithTag(InitialPointTag))
             {
                 GameObject hero = _gameFactory.CreateHero(_heroStaticData, player.transform);
-                selectedUnits.GetComponent<SelectUnit>().Construct(hero.GetComponent<Selectable>());
+                selectedUnits.GetComponent<SelectUnit>().Construct(hero.GetComponent<Selectable>(), hud.GetComponent<StartBattle>());
                 hud.GetComponent<EndGame>().Construct(hero, GameObject.FindGameObjectsWithTag(InitialPointTag).Length);
             }
             
