@@ -7,6 +7,9 @@ namespace Weapons
     {
         [SerializeField] private float _speed;
         [SerializeField] private int _damage;
+        [SerializeField] private GameObject _hitEffect;
+
+        private float _timeDestroy = 0.5f;
 
         private void Update()
         {
@@ -18,8 +21,13 @@ namespace Weapons
             if (other.TryGetComponent(out EnemyHealth enemy))
             {
                 enemy.TakeDamage(_damage);
+                Instantiate(_hitEffect, transform.position, Quaternion.identity);
                 Destroy(gameObject);
             }
+
+            Debug.Log(other + " stolkHoveHue");
+            
+            Destroy(gameObject, _timeDestroy);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Weapons
@@ -8,9 +9,11 @@ namespace Weapons
         [SerializeField] private Slider _powerAttack;
 
         private float _currentPowerAttack;
-        private bool _canShoot;
+        private bool _canShoot = false;
         private float _maxPowerAttack = 1f;
-        private float _speedFilling = 2f;
+        private float _speedFilling = 1.5f;
+        private bool _maxPower = true;
+        private int _powerBullet = 5;
 
         public float PowerAttack => _currentPowerAttack;
 
@@ -25,14 +28,18 @@ namespace Weapons
             if (_canShoot)
             {
                 _powerAttack.gameObject.SetActive(true);
-
-                if (_currentPowerAttack != _powerAttack.maxValue)
+                
+                if (_currentPowerAttack != _maxPowerAttack)
                 {
                     _currentPowerAttack += Time.deltaTime * _speedFilling;
+                    _powerAttack.value = _currentPowerAttack;
                 }
-
-                _powerAttack.value =
-                    _currentPowerAttack == _maxPowerAttack ? _powerAttack.maxValue : _currentPowerAttack;
+                else
+                {
+                    _powerAttack.value = _powerAttack.maxValue;
+                    _currentPowerAttack = _powerAttack.maxValue;
+                    _maxPower = false;
+                }
             }
             else
             {

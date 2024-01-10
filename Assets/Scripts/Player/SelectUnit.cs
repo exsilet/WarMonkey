@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Logic;
 using UI.Element;
 using UnityEngine;
 
@@ -12,7 +13,7 @@ namespace Player
         public Selectable CurrentSelectable;
 
         private GameObject _selectedObject;
-        private HeroAttack _heroAttack;
+        private Shooting _heroAttack;
         private StartBattle _startBattle;
 
         private Selectable _selectable;
@@ -49,7 +50,8 @@ namespace Player
                 {
                     if (_heroAttack != null)
                     {
-                        _heroAttack.ShootAttack();
+                        //_heroAttack.ShootAttack();
+                        _heroAttack.StopCharging();
                         _heroAttack = null;
                         _selectedObject.GetComponent<Rigidbody>().useGravity = true;
                         _selectedObject = null;
@@ -87,11 +89,12 @@ namespace Player
                         CurrentSelectable = hit.collider.gameObject.GetComponent<Selectable>();
                         CurrentSelectable.Select();
                         _selected = hit.transform;
-                        //_selected.transform.position = clickPosition;
                         _selectedObject = hit.collider.gameObject;
                         _selectedObject.GetComponent<Rigidbody>().useGravity = false;
-                        _heroAttack = hit.collider.GetComponent<HeroAttack>();
-                        _heroAttack.StartAttack();
+                        //_heroAttack = hit.collider.GetComponent<HeroAttack>();
+                        _heroAttack = hit.collider.GetComponent<Shooting>();
+                        //_heroAttack.StartAttack();
+                        _heroAttack.StartCharging();
                     }
                 }
             }
