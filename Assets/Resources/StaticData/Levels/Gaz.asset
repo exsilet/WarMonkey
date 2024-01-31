@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88b57ceaf5e546f09fd7b6362b3a91b3, type: 3}
+  m_Name: Gaz
+  m_EditorClassIdentifier: 
+  LevelKey: GazMap
+  EnemySpawners:
+  - Id: GameScene_fc1ced9f-d179-4c6d-b204-da6fe53f8c6b
+    EnemyTypeID: 0
+    Position: {x: 8.29, y: 0.5, z: 23.41}
+  - Id: GameScene_99ec3ef6-5d32-4d1d-8633-3c07aa2766ab
+    EnemyTypeID: 1
+    Position: {x: 6.32, y: 0.5, z: 27.2}
+  - Id: GameScene_7184d86a-c36f-4ea5-9d6c-925d34fcf62d
+    EnemyTypeID: 2
+    Position: {x: 10.24, y: 0.5, z: 23.28}
+  - Id: GameScene_e75d14f4-3e0c-4f1a-9f4b-e55c638c13e2
+    EnemyTypeID: 3
+    Position: {x: 8.610001, y: 0.5, z: 28.91}
+  - Id: GameScene_338e4e3c-2c31-4645-b93a-629e6e3ec522
+    EnemyTypeID: 4
+    Position: {x: 5.36, y: 0.5, z: 30.060001}
+  - Id: GameScene_5ae2ffec-6000-43bb-a348-dc95deb4576e
+    EnemyTypeID: 5
+    Position: {x: 4.26, y: 0.5, z: 29.16}
+  - Id: GameScene_75bb8050-3f24-4070-b2d9-0775ee7d948b
+    EnemyTypeID: 6
+    Position: {x: 7.4500003, y: 0.5, z: 28.02}
+  - Id: GameScene_6ecd4ce2-1689-4478-986c-3201f02251a5
+    EnemyTypeID: 7
+    Position: {x: 9.89, y: 0.5, z: 29.83}
+  - Id: GameScene_04d767ec-fb2b-4494-b973-aaf6cc10a767
+    EnemyTypeID: 8
+    Position: {x: 10.59, y: 0.5, z: 26.91}
+  - Id: GameScene_0334546f-9fc0-4cb0-9590-a0dfc6833352
+    EnemyTypeID: 9
+    Position: {x: 5.9700003, y: 0.5, z: 23.62}
+  - Id: GameScene_f596b88a-248f-4269-84a0-bd0244492a12
+    EnemyTypeID: 10
+    Position: {x: 6.21, y: 0.5, z: 25.460001}
+  - Id: GameScene_8cf27840-cdf8-4995-88e0-2594c0299426
+    EnemyTypeID: 11
+    Position: {x: 2.7500002, y: 0.5, z: 25.710001}
+  - Id: GameScene_f5b5ba17-ee65-4809-870a-c6a2c7395c77
+    EnemyTypeID: 12
+    Position: {x: 3.1200001, y: 0.5, z: 29.25}
+  - Id: GameScene_48b425ac-bcf0-4741-9407-a4c93bfb899f
+    EnemyTypeID: 13
+    Position: {x: 2.66, y: 0.5, z: 23.91}
+  - Id: GameScene_700b495f-7435-4b72-a9ad-b55e88a30116
+    EnemyTypeID: 14
+    Position: {x: 9.65, y: 0.5, z: 27.99}
+  - Id: GameScene_74ef72de-89ea-47fc-8aea-aaa8a81300d6
+    EnemyTypeID: 15
+    Position: {x: 8.43, y: 0.5, z: 30.53}
+  - Id: GameScene_f15d79ec-8474-4630-966f-21c015d7645c
+    EnemyTypeID: 16
+    Position: {x: 8.29, y: 0.5, z: 25.25}
+  - Id: GameScene_aeede745-c597-4ff8-ad60-d5261974656e
+    EnemyTypeID: 17
+    Position: {x: 5.1800003, y: 0.5, z: 26.49}
+  - Id: GameScene_e72fdf6f-be7c-4680-ac3f-e75ce1dedd97
+    EnemyTypeID: 18
+    Position: {x: 3.64, y: 0.5, z: 23.82}
+  - Id: GameScene_a0e70ce9-c7a5-4b30-a239-e9a89b19c677
+    EnemyTypeID: 19
+    Position: {x: 10.85, y: 0.5, z: 28.77}
+  - Id: GameScene_b8b38fbf-2690-4f8d-88d7-fbc3447cee23
+    EnemyTypeID: 20
+    Position: {x: 6.36, y: 0.5, z: 28.970001}
+  - Id: GameScene_32f0d5f5-24ee-48ff-9eb7-10d51c8463b1
+    EnemyTypeID: 21
+    Position: {x: 8.42, y: 0.5, z: 27.07}
+  - Id: GameScene_51b9e7cf-3366-4f8b-8ebd-c99ce279e6f4
+    EnemyTypeID: 22
+    Position: {x: 4.1000004, y: 0.5, z: 27.390001}
+  - Id: GameScene_56ea3e1f-8e9a-4100-a089-c673f79a327e
+    EnemyTypeID: 23
+    Position: {x: 7.3100004, y: 0.5, z: 29.85}
+  - Id: GameScene_51be2ab5-3ba1-4ee4-8683-05a99a7c22e5
+    EnemyTypeID: 24
+    Position: {x: 2.9800003, y: 0.5, z: 27.48}
+  - Id: GameScene_694f0eb1-6a0b-4d47-854f-17695b79fa1b
+    EnemyTypeID: 25
+    Position: {x: 10.37, y: 0.5, z: 25.08}
+  - Id: GameScene_105b1bb4-aaa2-48ce-8b96-276c57ece6de
+    EnemyTypeID: 26
+    Position: {x: 3.8700001, y: 0.5, z: 25.560001}
+  - Id: GameScene_cce9f463-119e-44c4-b8f6-a1291e24158a
+    EnemyTypeID: 27
+    Position: {x: 5.3700004, y: 0.5, z: 28.17}

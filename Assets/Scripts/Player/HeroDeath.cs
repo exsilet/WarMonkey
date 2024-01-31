@@ -9,6 +9,7 @@ namespace Player
     {
         [SerializeField] private HeroHealth _health;
         [SerializeField] private HeroAnimator _animator;
+        [SerializeField] private AudioSource _soundDeath;
 
         private int _playerKilled;
         
@@ -37,6 +38,7 @@ namespace Player
             _animator.PlayDeath();
             _playerKilled++;
             SlainPlayer?.Invoke(_playerKilled);
+            _soundDeath.Play();
             StartCoroutine(DestroyTimer());
         }
 

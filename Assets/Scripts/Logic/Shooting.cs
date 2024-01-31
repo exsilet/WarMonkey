@@ -13,7 +13,6 @@ namespace Logic
         [SerializeField] private float _maxForce;
         [SerializeField] private float _maxHoldTime = 2f;
         [SerializeField] private AudioSource _audioSource;
-        [SerializeField] private AudioClip _clipFlight;
 
         private float _speedFilling = 3f;
         private float currentForce = 0f;
@@ -62,7 +61,7 @@ namespace Logic
             GameObject projectile = Instantiate(_bulletPrefab, _shootSpawnPoint.position,
                 _shootSpawnPoint.rotation);
             Rigidbody projectileRigidbody = projectile.GetComponent<Rigidbody>();
-            _audioSource.PlayOneShot(_clipFlight);
+            _audioSource.Play();
 
             projectileRigidbody.AddForce(_shootSpawnPoint.forward * currentForce, ForceMode.Impulse);
         }

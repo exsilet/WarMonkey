@@ -7,6 +7,7 @@ namespace Player
     public class HeroHealth : MonoBehaviour, IHealth
     {
         [SerializeField] private HeroAnimator _animator;
+        [SerializeField] private AudioSource _soundHit;
 
         public event Action HealthChanged;
 
@@ -18,6 +19,7 @@ namespace Player
             Current -= damage;
             
             _animator.PlayHit();
+            _soundHit.Play();
             
             HealthChanged?.Invoke();
         }

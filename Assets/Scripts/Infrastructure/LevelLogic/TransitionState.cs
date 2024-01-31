@@ -21,6 +21,7 @@ namespace Infrastructure.LevelLogic
         private const string Construction = "Construction";
         private const string City = "City";
         private const string Police = "Police";
+        private const string GazStation = "GazMap";
         private List<string> _sceneList = new();
 
         public TransitionState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, LoadingCurtain curtain,
@@ -58,6 +59,7 @@ namespace Infrastructure.LevelLogic
             _sceneList.Add(Construction);
             _sceneList.Add(City);
             _sceneList.Add(Police);
+            _sceneList.Add(GazStation);
         }
 
         private void RandomNameScene()

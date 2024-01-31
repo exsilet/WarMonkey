@@ -9,6 +9,7 @@ namespace Enemy
         [SerializeField] private float _current;
         [SerializeField] private float _max;
         [SerializeField] private EnemyAnimator _animator;
+        [SerializeField] private AudioSource _audioSource;
 
         public event Action HealthChanged;
 
@@ -27,8 +28,9 @@ namespace Enemy
         public void TakeDamage(int damage)
         {
             Current -= damage;
-      
+            
             _animator.PlayHit();
+            _audioSource.Play();
       
             HealthChanged?.Invoke();
         }

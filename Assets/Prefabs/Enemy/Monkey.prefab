@@ -2279,6 +2279,7 @@ MonoBehaviour:
   _current: 6
   _max: 6
   _animator: {fileID: 3386228018908117911}
+  _audioSource: {fileID: 0}
 --- !u!114 &3386228018908117911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2350,6 +2351,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _inputSourceBehaviour: {fileID: 981633633116985551}
+  _enemyAnimator: {fileID: 0}
   Speed: 0
 --- !u!114 &8423088650230182731
 MonoBehaviour:

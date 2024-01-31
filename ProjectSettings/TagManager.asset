@@ -9,6 +9,7 @@ TagManager:
   - InitialPoint
   - EnemySpawner
   - SpawnerController
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - HeroBullet
   - Enemy
   - EnemyBullet
-  - 
+  - CloseZone
   - 
   - 
   - 

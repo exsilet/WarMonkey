@@ -13,10 +13,6 @@ namespace UI.Element
 {
     public class NextLevel : MonoBehaviour, ISavedProgressReader
     {
-        private const string GameScene = "GameScene";
-        private const string Construction = "Construction";
-        private const string City = "City";
-        private const string Police = "Police";
         private const string TransitionScene = "TransitionScene";
         
         [SerializeField] private Button _nextLevel;
@@ -28,21 +24,12 @@ namespace UI.Element
         private string TransferTo;
         private int _gameLevel = 1;
         private int _sceneIndex;
-        private List<string> _sceneList = new();
 
         private void Awake()
         {
             _staticData = _heroStaticData;
             _saveLoadService = AllServices.Container.Single<ISaveLoadService>();
             _stateMachine = AllServices.Container.Single<IGameStateMachine>();
-        }
-
-        private void Start()
-        {
-            _sceneList.Add(GameScene);
-            _sceneList.Add(Construction);
-            _sceneList.Add(City);
-            _sceneList.Add(Police);
         }
 
         private void OnEnable()
@@ -58,22 +45,8 @@ namespace UI.Element
 
         private void Next()
         {
-            //RandomNameScene();
             _saveLoadService.SaveProgress();
             _stateMachine.Enter<TransitionState, string>(TransitionScene, _staticData);
-        }
-
-        private void RandomNameScene()
-        {
-            var randomScene = Random.Range(0, _sceneList.Count);
-
-            for (int i = 0; i < _sceneList.Count; i++)
-            {
-                if (i == randomScene)
-                {
-                    TransferTo = _sceneList[i];
-                }
-            }
         }
     }
 }

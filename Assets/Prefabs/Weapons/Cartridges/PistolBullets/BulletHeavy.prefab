@@ -116,8 +116,6 @@ MonoBehaviour:
   _damage: 4
   _hitEffect: {fileID: 5880797563127281583, guid: 265d3a5ba69981a4698ceabcedf368b0, type: 3}
   _audioSource: {fileID: 7220513932334491752}
-  _clipFlight: {fileID: 8300000, guid: 4250801180908ae4a92922133598c8f0, type: 3}
-  _clipDeath: {fileID: 8300000, guid: f82e098ed693b9b4090ff7dbca330e4e, type: 3}
 --- !u!54 &-8596706527804673048
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -144,7 +142,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: f82e098ed693b9b4090ff7dbca330e4e, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

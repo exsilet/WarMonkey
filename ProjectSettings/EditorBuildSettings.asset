@@ -12,19 +12,22 @@ EditorBuildSettings:
     path: Assets/Scenes/MenuScene.unity
     guid: 9430c38c555b6fc4499153b1d19007a8
   - enabled: 1
+    path: Assets/Scenes/TransitionScene.unity
+    guid: 5ec4e20763c72c54d8bbf5abc54b824b
+  - enabled: 1
     path: Assets/Scenes/GameScene.unity
     guid: e2f3a3cfb7c95c64bbe3832f23e4ce70
+  - enabled: 1
+    path: Assets/Scenes/GazMap.unity
+    guid: 0c3c63a235cc5a74e80c55038c484ea7
   - enabled: 1
     path: Assets/Scenes/Police.unity
     guid: af457669dc64ae441b3ab36fdd463df8
   - enabled: 1
-    path: Assets/Scenes/Construction.unity
-    guid: 869aa7cc2f6738d4996c43b3868f6d2e
-  - enabled: 1
     path: Assets/Scenes/City.unity
-    guid: deb3c7f000b0c7348856cc3622a77392
+    guid: e1ffcfaf9056ef244b67d7a9a091e19b
   - enabled: 1
-    path: Assets/Scenes/TransitionScene.unity
-    guid: 5ec4e20763c72c54d8bbf5abc54b824b
+    path: Assets/Scenes/Construction.unity
+    guid: e358f06d346007347b4589962a562fa1
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: c94acbb5ec85e1f4491d64d5a5bf394c, type: 2}
