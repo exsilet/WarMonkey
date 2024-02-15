@@ -2325,7 +2325,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _uiTimer: {fileID: 685668437725019819}
-  _timerStart: 5
+  _timerStart: 3
   _textTimer: {fileID: 5878581186971773366}
 --- !u!114 &373340859265903150
 MonoBehaviour:
@@ -3938,7 +3938,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -4354145360120173402, guid: cceb7d03652ce574587d679626d0b26d, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 708b388c2915f7a468e04e84daf2be65, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 58a275a2c26cbea4f87197f5d4e21080, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

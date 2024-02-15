@@ -5,6 +5,7 @@ namespace Weapons
     public class Pistol : Weapon
     {
         private int _speedCoefficient = 5;
+        private Quaternion _rotation = new Quaternion(90, 0, 0, 0);
         
         public override void Shoot(Transform shootPoint, float power)
         {

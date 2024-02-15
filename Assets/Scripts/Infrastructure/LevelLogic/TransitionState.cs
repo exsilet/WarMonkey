@@ -58,7 +58,7 @@ namespace Infrastructure.LevelLogic
             _sceneList.Add(GameScene);
             _sceneList.Add(Construction);
             _sceneList.Add(City);
-            _sceneList.Add(Police);
+            //_sceneList.Add(Police);
             _sceneList.Add(GazStation);
         }
 

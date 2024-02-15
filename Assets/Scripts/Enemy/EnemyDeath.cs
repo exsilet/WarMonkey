@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Enemy
 {
@@ -10,7 +11,11 @@ namespace Enemy
         [SerializeField] private EnemyHealth _health;
         [SerializeField] private EnemyAnimator _animator;
         [SerializeField] private CapsuleCollider _collider;
+        [SerializeField] private Rigidbody _rigidbody;
+        [SerializeField] private NavMeshAgent _agent;
 
+        public bool Death = false;
+        
         public event Action Happened;
 
         private void Start()
@@ -42,7 +47,9 @@ namespace Enemy
         private void Die()
         {
             Happened?.Invoke();
-            
+            Death = true;
+            _agent.gameObject.SetActive(false);
+            _rigidbody.isKinematic = true;
             //StartCoroutine(DestroyTimer());
         }
 

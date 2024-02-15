@@ -7,11 +7,13 @@ namespace Enemy
     {
         [SerializeField] private MonoBehaviour _inputSourceBehaviour;
         [SerializeField] private EnemyAnimator _enemyAnimator;
+        [SerializeField] private EnemyDeath _death;
 
         public float Speed;
         private IInputBotService _inputService;
         private float Epsilon = 0.001f;
         private NavMeshAgent _agent;
+        private bool _enemyDeath = true;
 
         private void Awake()
         {
@@ -21,12 +23,15 @@ namespace Enemy
 
         private void Update()
         {
-            MovementDirection();
+            if (_enemyDeath != _death.Death)
+            {
+                MovementDirection();
+            }
         }
 
         private void MovementDirection()
         {
-            var movement = new Vector3(_inputService.MoveInput.x, 0f, _inputService.MoveInput.y);
+            Vector3 movement = new Vector3(_inputService.MoveInput.x, 0f, _inputService.MoveInput.y);
             movement *= Speed;
             _agent.SetDestination(movement);
         }

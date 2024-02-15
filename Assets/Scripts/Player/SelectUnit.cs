@@ -10,6 +10,12 @@ namespace Player
     {
         [SerializeField] private LayerMask _layerMask;
 
+        private float _frontBorder = -6;
+        private float _backBorder = -16;
+        private float _leftBorder = -4.2f;
+        private float _rightBorder = 20;
+        private float _swapBorder;
+
         public Selectable CurrentSelectable;
 
         private GameObject _selectedObject;
@@ -40,7 +46,7 @@ namespace Player
             if (_startBattle.CurrentStartBattle)
             {
                 DragObject();
-            
+
                 if (Input.GetMouseButtonDown(0))
                 {
                     SingleSelect();
@@ -51,11 +57,7 @@ namespace Player
                     if (_heroAttack != null)
                     {
                         //_heroAttack.ShootAttack();
-                        _heroAttack.StopCharging();
-                        _heroAttack = null;
-                        _selectedObject.GetComponent<Rigidbody>().useGravity = true;
-                        _selectedObject = null;
-                        CurrentSelectable = null;
+                        UnSelected();
                     }
                 }
             }
@@ -66,6 +68,16 @@ namespace Player
             _units.Add(_selectable);
         }
 
+        private void UnSelected()
+        {
+            _heroAttack.StopCharging();
+            _heroAttack = null;
+            _selectedObject.GetComponent<Rigidbody>().useGravity = true;
+            _selectedObject = null;
+            CurrentSelectable.Deselect();
+            CurrentSelectable = null;
+        }
+
         private void DragObject()
         {
             if (_selectedObject != null)
@@ -73,7 +85,22 @@ namespace Player
                 Vector3 position = new Vector3(Input.mousePosition.x, Input.mousePosition.y,
                     _camera.WorldToScreenPoint(_selectedObject.transform.position).z);
                 Vector3 worldPosition = _camera.ScreenToWorldPoint(position);
-                _selectedObject.transform.position = new Vector3(worldPosition.x, 0.45f, worldPosition.z);
+
+                if (worldPosition.z < _frontBorder && worldPosition.z > _backBorder && worldPosition.x < _rightBorder &&
+                    worldPosition.x > _leftBorder)
+                {
+                    _selectedObject.transform.position = new Vector3(worldPosition.x, 0.45f, worldPosition.z);
+                }
+                else if (worldPosition.x < _rightBorder && worldPosition.x > _leftBorder)
+                {
+                    _swapBorder = _frontBorder - worldPosition.z;
+                    float swapTop = worldPosition.x -_swapBorder;
+                    
+                    if (swapTop < _rightBorder)
+                    {
+                        _selectedObject.transform.position = new Vector3(swapTop, 0.45f, _frontBorder);
+                    }
+                }
             }
         }
 
@@ -84,6 +111,8 @@ namespace Player
             {
                 if (hit.collider != null)
                 {
+                    Debug.Log("select + " + hit.collider);
+
                     if (hit.collider.gameObject.GetComponent<Selectable>())
                     {
                         CurrentSelectable = hit.collider.gameObject.GetComponent<Selectable>();

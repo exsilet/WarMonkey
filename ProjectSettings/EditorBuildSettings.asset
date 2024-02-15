@@ -21,13 +21,13 @@ EditorBuildSettings:
     path: Assets/Scenes/GazMap.unity
     guid: 0c3c63a235cc5a74e80c55038c484ea7
   - enabled: 1
-    path: Assets/Scenes/Police.unity
-    guid: af457669dc64ae441b3ab36fdd463df8
-  - enabled: 1
     path: Assets/Scenes/City.unity
     guid: e1ffcfaf9056ef244b67d7a9a091e19b
   - enabled: 1
     path: Assets/Scenes/Construction.unity
     guid: e358f06d346007347b4589962a562fa1
+  - enabled: 0
+    path: Assets/Scenes/Police.unity
+    guid: af457669dc64ae441b3ab36fdd463df8
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: c94acbb5ec85e1f4491d64d5a5bf394c, type: 2}
