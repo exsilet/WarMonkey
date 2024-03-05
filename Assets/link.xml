@@ -1,0 +1,22 @@
+<linker>
+  <assembly fullname="Assembly-CSharp">
+    <type fullname="BehaviorDesigner.Runtime.Tasks.Selector" preserve="all"/>
+    <type fullname="BehaviorDesigner.Runtime.Tasks.Sequence" preserve="all"/>
+    <type fullname="BehaviorDesigner.Runtime.Tasks.Repeater" preserve="all"/>
+    <type fullname="BehaviorDesigner.Runtime.Tasks.Idle" preserve="all"/>
+    <type fullname="BehaviorDesigner.Runtime.Tasks.Wait" preserve="all"/>
+    <type fullname="BehaviorDesigner.Runtime.Tasks.ReturnFailure" preserve="all"/>
+    <type fullname="BehaviorDesigner.Runtime.Tasks.RandomSelector" preserve="all"/>
+    <type fullname="Behavior_Designer.Runtime.Variables.SharedVector2" preserve="all"/>
+    <type fullname="BehaviorDesigner.Runtime.Tasks.Unity.UnityAnimator.SetBoolParameter" preserve="all"/>
+    <type fullname="BehaviorDesigner.Runtime.Tasks.Unity.UnityAnimator.SetTrigger" preserve="all"/>
+    <type fullname="Enemy.SetMovementInput" preserve="all"/>
+    <type fullname="Enemy.IsHealthUnder" preserve="all"/>
+    <type fullname="Enemy.EnemyDeadCollider" preserve="all"/>
+    <type fullname="Enemy.EnemyActiveCollider" preserve="all"/>
+    <type fullname="Enemy.SharedBotInput" preserve="all"/>
+    <type fullname="Enemy.SetRandomDirection" preserve="all"/>
+    <type fullname="Enemy.SetShoot" preserve="all"/>
+    <type fullname="Enemy.IsHealthStand" preserve="all"/>
+  </assembly>
+</linker>

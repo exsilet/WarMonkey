@@ -10,6 +10,8 @@ namespace Player
         [SerializeField] private HeroHealth _health;
         [SerializeField] private HeroAnimator _animator;
         [SerializeField] private AudioSource _soundDeath;
+        [SerializeField] private Rigidbody _rigidbody;
+        [SerializeField] private Collider _collider;
 
         private int _playerKilled;
         
@@ -39,7 +41,9 @@ namespace Player
             _playerKilled++;
             SlainPlayer?.Invoke(_playerKilled);
             _soundDeath.Play();
-            StartCoroutine(DestroyTimer());
+            _rigidbody.isKinematic = true;
+            _collider.enabled = false;
+            //StartCoroutine(DestroyTimer());
         }
 
         private IEnumerator DestroyTimer()

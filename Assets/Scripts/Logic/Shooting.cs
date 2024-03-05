@@ -27,6 +27,7 @@ namespace Logic
         public void StartCharging()
         {
             _heroAnimator.PlayAttack();
+            _heroAnimator.Hold();
             currentForce = 0f;
             currentHoldTime = 0f;
             charging = true;
@@ -36,7 +37,7 @@ namespace Logic
         {
             if (charging)
             {
-                _heroAnimator.PlayAttackButtonUp();
+                _heroAnimator.StopHolding();
                 Shoot();
                 charging = false;
                 _forceSlider.gameObject.SetActive(false);

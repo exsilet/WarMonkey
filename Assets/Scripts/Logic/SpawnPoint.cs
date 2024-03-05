@@ -1,4 +1,5 @@
-﻿using Data;
+﻿using System;
+using Data;
 using Enemy;
 using Infrastructure.Factory;
 using Infrastructure.Service.SaveLoad;
@@ -9,7 +10,7 @@ using UnityEngine.Events;
 
 namespace Logic
 {
-    public class SpawnPoint : MonoBehaviour, ISavedProgress
+    public class SpawnPoint : MonoBehaviour
     {
         public EnemyTypeID EnemyTypeID;
         private IGameFactory _factory;
@@ -27,14 +28,11 @@ namespace Logic
             _factory = gameFactory;
         }
 
-        public void LoadProgress(PlayerProgress progress)
+        private void Start()
         {
-            if (progress.KillData.ClearedSpawners.Contains(Id))
-                _slain = true;
-            else
-                Spawn();
+            Spawn();
         }
-        
+
         private void OnDestroy()
         {
             if (_enemyDeath != null)
@@ -44,7 +42,6 @@ namespace Logic
         private void Spawn()
         {
             GameObject enemy = _factory.CreatEnemy(EnemyTypeID, transform);
-            //enemy.GetComponentInChildren<EnemyMonkey>().Construct(_startBattle);
             _enemyDeath = enemy.GetComponentInChildren<EnemyDeath>();
             _enemyDeath.Happened += Slay;
         }
@@ -57,14 +54,6 @@ namespace Logic
             _slain = true;
             _enemyKilled++;
             Slained?.Invoke(_enemyKilled);
-        }
-
-        public void UpdateProgress(PlayerProgress progress)
-        {
-            // List<string> slainSpawnersList = progress.KillData.ClearedSpawners;
-            //
-            // if(_slain && !slainSpawnersList.Contains(Id))
-            //     slainSpawnersList.Add(Id);
         }
     }
 }

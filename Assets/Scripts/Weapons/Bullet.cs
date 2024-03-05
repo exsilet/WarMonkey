@@ -24,8 +24,6 @@ namespace Weapons
                 Instantiate(_hitEffect, transform.position, Quaternion.identity);
                 Destroy(gameObject);
             }
-
-            Debug.Log(other + " stolkHoveHue");
             
             Destroy(gameObject, _timeDestroy);
         }

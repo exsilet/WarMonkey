@@ -15,7 +15,7 @@ namespace Player
         public event UnityAction<int> CurrentSoulChanged;
 
         public int currentScore => _currentScore;
-        public int EarnedScore => _earnedScore;        
+        public int EarnedScore => _earnedScore;      
 
         private void Start()
             => CurrentSoulChanged?.Invoke(_currentScore);

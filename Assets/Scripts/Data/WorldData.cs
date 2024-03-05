@@ -15,6 +15,7 @@ namespace Data
             Level = level;
             MonsterQuantity = 3;
             CurrentLevels = 1;
+            Score = 0;
         }
     }
 }

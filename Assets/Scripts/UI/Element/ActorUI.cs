@@ -39,6 +39,18 @@ namespace UI.Element
             }
         }
 
+        public void LoadProgress(PlayerProgress progress)
+        {
+            _monsterQuantity = progress.WorldData.MonsterQuantity;
+            _gameLevel = progress.WorldData.CurrentLevels;
+        }
+
+        public void UpdateProgress(PlayerProgress progress)
+        {
+            progress.WorldData.MonsterQuantity = _monsterQuantity;
+            progress.WorldData.CurrentLevels = _gameLevel;
+        }
+
         public void GetRewardEnemy()
         {
             foreach (var spawn in _spawnersPoint)
@@ -71,18 +83,6 @@ namespace UI.Element
                     _currentSpawner.Slained -= Slained;
                 }
             }
-        }
-
-        public void LoadProgress(PlayerProgress progress)
-        {
-            _monsterQuantity = progress.WorldData.MonsterQuantity;
-            _gameLevel = progress.WorldData.CurrentLevels;
-        }
-
-        public void UpdateProgress(PlayerProgress progress)
-        {
-            progress.WorldData.MonsterQuantity = _monsterQuantity;
-            progress.WorldData.CurrentLevels = _gameLevel;
         }
 
         private void CompleteLevel()

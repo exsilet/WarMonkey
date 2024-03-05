@@ -48,9 +48,8 @@ namespace Enemy
         {
             Happened?.Invoke();
             Death = true;
-            _agent.gameObject.SetActive(false);
+            //_agent.gameObject.SetActive(false);
             _rigidbody.isKinematic = true;
-            //StartCoroutine(DestroyTimer());
         }
 
         private IEnumerator DestroyTimer()

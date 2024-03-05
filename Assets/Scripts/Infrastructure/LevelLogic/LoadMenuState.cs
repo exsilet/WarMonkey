@@ -1,5 +1,6 @@
 ﻿using Infrastructure.Factory;
 using Infrastructure.Service.PersistentProgress;
+using Infrastructure.Service.SaveLoad;
 using Infrastructure.State;
 using UnityEngine;
 
@@ -39,6 +40,7 @@ namespace Infrastructure.LevelLogic
         private void OnLoaded()
         {
             InitGameWorld();
+            InformProgressReaders();
 
             _gameStateMachine.Enter<GameLoopState>();
         }
@@ -46,6 +48,12 @@ namespace Infrastructure.LevelLogic
         private void InitGameWorld()
         {
             GameObject hud = _gameFactory.CreateHudMenu();
+        }
+        
+        private void InformProgressReaders()
+        {
+            foreach (ISavedProgressReader progressReader in _gameFactory.ProgressReaders)
+                progressReader.LoadProgress(_progressService.Progress);
         }
     }
 }

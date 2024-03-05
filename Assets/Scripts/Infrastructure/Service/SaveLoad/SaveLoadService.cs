@@ -35,7 +35,6 @@ namespace Infrastructure.Service.SaveLoad
         public void ResetProgress()
         {            
             PlayerPrefs.DeleteKey(ProgressKey);
-            PlayerPrefs.DeleteAll();
             PlayerPrefs.Save();
             _gameFactory.ProgressWriters.Clear();
             _gameFactory.ProgressReaders.Clear();

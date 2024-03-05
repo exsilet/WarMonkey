@@ -74,7 +74,6 @@ namespace Infrastructure.LevelLogic
 
         private void InitSpawners(GameObject hud)
         {
-            //string sceneKey = _progressService.Progress.HeroState.GameLevel.ToString();
             string sceneKey = SceneManager.GetActiveScene().name;
             LevelStaticData levelData = _staticData.ForLevel(sceneKey);
             int monsterQuantity = _progressService.Progress.WorldData.MonsterQuantity;

@@ -1,5 +1,4 @@
 ﻿using BehaviorDesigner.Runtime.Tasks;
-using UnityEngine;
 
 namespace Enemy
 {

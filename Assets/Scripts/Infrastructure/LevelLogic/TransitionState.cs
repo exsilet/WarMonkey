@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Infrastructure.Factory;
-using Infrastructure.Service.PersistentProgress;
 using Infrastructure.State;
 using Infrastructure.StaticData.Players;
 using UnityEngine;
@@ -13,24 +12,20 @@ namespace Infrastructure.LevelLogic
         private readonly SceneLoader _sceneLoader;
         private readonly LoadingCurtain _curtain;
         private readonly IGameFactory _gameFactory;
-        private readonly IPersistentProgressService _progressService;
         private string TransferTo;
         private HeroStaticData _heroStaticData;
 
         private const string GameScene = "GameScene";
         private const string Construction = "Construction";
         private const string City = "City";
-        private const string Police = "Police";
         private const string GazStation = "GazMap";
         private List<string> _sceneList = new();
 
-        public TransitionState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, LoadingCurtain curtain,
-            IPersistentProgressService progressService)
+        public TransitionState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, LoadingCurtain curtain)
         {
             _gameStateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
             _curtain = curtain;
-            _progressService = progressService;
         }
 
         public void EnterThreeParameters(string sceneName, HeroStaticData heroData)
@@ -58,7 +53,6 @@ namespace Infrastructure.LevelLogic
             _sceneList.Add(GameScene);
             _sceneList.Add(Construction);
             _sceneList.Add(City);
-            //_sceneList.Add(Police);
             _sceneList.Add(GazStation);
         }
 

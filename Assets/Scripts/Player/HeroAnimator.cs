@@ -1,4 +1,5 @@
 ﻿using System;
+using Agava.YandexGames;
 using Logic;
 using UnityEngine;
 
@@ -7,15 +8,15 @@ namespace Player
     public class HeroAnimator : MonoBehaviour, IAnimationStateReader
     {
         private static readonly int Attack = Animator.StringToHash("AttackNormal");
-        private static readonly int ReleasingTheButton = Animator.StringToHash("ReleasingTheButton");
+        private static readonly int IsHold = Animator.StringToHash("IsHold");
         private static readonly int Hit = Animator.StringToHash("Hit");
         private static readonly int Die = Animator.StringToHash("Die");
         private static readonly int Blocking = Animator.StringToHash("Blocking");
         private static readonly int Revive = Animator.StringToHash("Revive");
         
         private readonly int _idleStateHash = Animator.StringToHash("Idle");
-        private readonly int _attackStateHash = Animator.StringToHash("Attack Normal");
-        private readonly int _releasingTheButtonStateHash = Animator.StringToHash("Releasing The Button");
+        private readonly int _attackStateHash = Animator.StringToHash("RangeAttack1");
+        private readonly int _releasingTheButtonStateHash = Animator.StringToHash("RangeAttack1 0");
         private readonly int _blockingStateHash = Animator.StringToHash("Blocking");
         private readonly int _reviveStateHash = Animator.StringToHash("Revive");
         private readonly int _deathStateHash = Animator.StringToHash("Die");
@@ -29,13 +30,19 @@ namespace Player
 
         private void Awake() => _animator = GetComponent<Animator>();
 
-        public void PlayHit() => _animator.SetTrigger(Hit);
+        public void PlayHit()
+        {
+            _animator.SetTrigger(Hit);
+        }
+
         public void PlayAttack() => _animator.SetTrigger(Attack);
         public bool IsAttacking => State == AnimatorState.Attack;
         public void PlayRevive() => _animator.SetTrigger(Revive);
         public void PlayBlocking() => _animator.SetTrigger(Blocking);
         public void PlayDeath() => _animator.SetTrigger(Die);
-        public void PlayAttackButtonUp() => _animator.SetTrigger(ReleasingTheButton);
+        
+        public void Hold() => _animator.SetBool(IsHold, false);
+        public void StopHolding() => _animator.SetBool(IsHold, true);
 
         public void EnteredState(int stateHash)
         {

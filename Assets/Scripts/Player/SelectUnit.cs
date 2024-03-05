@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Logic;
 using UI.Element;
 using UnityEngine;
@@ -56,7 +55,6 @@ namespace Player
                 {
                     if (_heroAttack != null)
                     {
-                        //_heroAttack.ShootAttack();
                         UnSelected();
                     }
                 }
@@ -91,11 +89,11 @@ namespace Player
                 {
                     _selectedObject.transform.position = new Vector3(worldPosition.x, 0.45f, worldPosition.z);
                 }
-                else if (worldPosition.x < _rightBorder && worldPosition.x > _leftBorder)
+                else if (worldPosition.z > _frontBorder)
                 {
                     _swapBorder = _frontBorder - worldPosition.z;
-                    float swapTop = worldPosition.x -_swapBorder;
-                    
+                    float swapTop = worldPosition.x - _swapBorder;
+
                     if (swapTop < _rightBorder)
                     {
                         _selectedObject.transform.position = new Vector3(swapTop, 0.45f, _frontBorder);
@@ -111,8 +109,6 @@ namespace Player
             {
                 if (hit.collider != null)
                 {
-                    Debug.Log("select + " + hit.collider);
-
                     if (hit.collider.gameObject.GetComponent<Selectable>())
                     {
                         CurrentSelectable = hit.collider.gameObject.GetComponent<Selectable>();
@@ -120,20 +116,10 @@ namespace Player
                         _selected = hit.transform;
                         _selectedObject = hit.collider.gameObject;
                         _selectedObject.GetComponent<Rigidbody>().useGravity = false;
-                        //_heroAttack = hit.collider.GetComponent<HeroAttack>();
                         _heroAttack = hit.collider.GetComponent<Shooting>();
-                        //_heroAttack.StartAttack();
                         _heroAttack.StartCharging();
                     }
                 }
-            }
-        }
-
-        private void DeselectAll()
-        {
-            foreach (var unit in _units)
-            {
-                unit.Deselect();
             }
         }
     }

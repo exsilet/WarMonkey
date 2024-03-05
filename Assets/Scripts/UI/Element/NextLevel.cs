@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using Agava.YandexGames;
 using Data;
 using Infrastructure.LevelLogic;
 using Infrastructure.Service;
@@ -7,7 +7,6 @@ using Infrastructure.State;
 using Infrastructure.StaticData.Players;
 using UnityEngine;
 using UnityEngine.UI;
-using Random = UnityEngine.Random;
 
 namespace UI.Element
 {
@@ -45,8 +44,28 @@ namespace UI.Element
 
         private void Next()
         {
+            InterstitialAd.Show(OnOpenCallback, OnCloseCallback, OnErrorCallback);
             _saveLoadService.SaveProgress();
             _stateMachine.Enter<TransitionState, string>(TransitionScene, _staticData);
+        }
+        
+        private void OnOpenCallback()
+        {
+            Time.timeScale = 0;
+            AudioListener.pause = true;
+        }
+
+        private void OnErrorCallback(string description)
+        {
+            Time.timeScale = 1;
+            AudioListener.pause = false;
+            Debug.Log(description);
+        }
+
+        private void OnCloseCallback(bool description)
+        {
+            Time.timeScale = 1;
+            AudioListener.pause = false;
         }
     }
 }

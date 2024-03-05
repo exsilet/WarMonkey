@@ -23,8 +23,10 @@ namespace Infrastructure.State
                 [typeof(LoadMenuState)] = new LoadMenuState(this, sceneLoader, loadingCurtain, services.Single<IGameFactory>(),
                     services.Single<IPersistentProgressService>()),
                 
-                [typeof(TransitionState)] = new TransitionState(this, sceneLoader, loadingCurtain,
-                    services.Single<IPersistentProgressService>()),
+                [typeof(TransitionState)] = new TransitionState(this, sceneLoader, loadingCurtain),
+                
+                [typeof(TransitionReloadState)] = new TransitionReloadState(this, sceneLoader, loadingCurtain,
+                    services.Single<IPersistentProgressService>(), services.Single<ISaveLoadService>()),
 
                 [typeof(LoadProgressState)] = new LoadProgressState(this, 
                     services.Single<IPersistentProgressService>(),services.Single<ISaveLoadService>()),
