@@ -1,5 +1,7 @@
 ﻿using Agava.YandexGames;
+using Lean.Localization;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UI.Leaderboards
 {
@@ -9,22 +11,31 @@ namespace UI.Leaderboards
         [SerializeField] private Transform _leaderBoard;
         [SerializeField] private Transform _listLeaderBoard;
         [SerializeField] private Transform _notLogin;
+        [SerializeField] private Image _iconLeaderboard;
+        [SerializeField] private Image _iconListLeaderboard;
+        [SerializeField] private Sprite _iconRus;
+        [SerializeField] private Sprite _iconEng;
+        [SerializeField] private Sprite _iconTur;
 
-        private const string WavesLeader = "BestInTheGame";
+        private const string WavesLeader = "TableOfTheBest";
         private const string Anonymous = "Anonymous";
         private const string TableScore = "TableScore";
+        private const string Russian = "Russian";
+        private const string English = "English";
+        private const string Turkish = "Turkish";
 
+        private string _languageCode;
         private int _score;
         
         private void Start()
         {
             _score = PlayerPrefs.GetInt(TableScore);
-            Debug.Log(" score " + _score);
             SetScore(_score);
         }
 
         public void Show()
         {
+            ChangeLanguage();
             _leaderBoard.gameObject.SetActive(true);
 
 #if !UNITY_EDITOR
@@ -73,6 +84,8 @@ namespace UI.Leaderboards
             {
                 element.gameObject.SetActive(false);
             }
+
+            _languageCode = null;
         }
 
         private void SetScore(int scoreAmount)
@@ -92,6 +105,31 @@ namespace UI.Leaderboards
             }
         });
 #endif
+        }
+
+        private void ChangeLanguage()
+        {
+            _languageCode = LeanLocalization.GetFirstCurrentLanguage();
+
+            switch (_languageCode)
+            {
+                case English:
+                    IconLeaderboard(_iconEng);
+                    break;
+                case Russian:
+                    IconLeaderboard(_iconRus);
+                    break;
+                case Turkish:
+                    IconLeaderboard(_iconTur);
+                    break;
+                
+            }
+        }
+
+        private void IconLeaderboard(Sprite iconLanguage)
+        {
+            _iconLeaderboard.sprite = iconLanguage;
+            _iconListLeaderboard.sprite = iconLanguage;
         }
     }
 }

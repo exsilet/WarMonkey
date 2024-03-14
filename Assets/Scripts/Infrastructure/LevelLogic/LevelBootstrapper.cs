@@ -23,20 +23,14 @@ namespace Infrastructure.LevelLogic
             _stateMachine = AllServices.Container.Single<IGameStateMachine>();
         }
 
-        private void OnEnable()
-        {
+        private void OnEnable() => 
             _levelScreen.StartLoaded += OnNewGameLoaded;
-        }
 
 
-        private void OnDisable()
-        {
+        private void OnDisable() => 
             _levelScreen.StartLoaded -= OnNewGameLoaded;
-        }
 
-        private void OnNewGameLoaded()
-        {
+        private void OnNewGameLoaded() => 
             _stateMachine.Enter<LoadLevelState, string>(NewLevel, _staticData);
-        }
     }
 }

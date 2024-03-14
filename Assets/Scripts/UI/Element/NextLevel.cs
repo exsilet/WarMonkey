@@ -13,10 +13,10 @@ namespace UI.Element
     public class NextLevel : MonoBehaviour, ISavedProgressReader
     {
         private const string TransitionScene = "TransitionScene";
-        
+
         [SerializeField] private Button _nextLevel;
         [SerializeField] private HeroStaticData _heroStaticData;
-        
+
         private IGameStateMachine _stateMachine;
         private ISaveLoadService _saveLoadService;
         private HeroStaticData _staticData;
@@ -37,18 +37,19 @@ namespace UI.Element
         private void OnDisable()
             => _nextLevel.onClick.RemoveListener(Next);
 
-        public void LoadProgress(PlayerProgress progress)
-        {
+        public void LoadProgress(PlayerProgress progress) => 
             _gameLevel = progress.WorldData.CurrentLevels;
-        }
 
         private void Next()
         {
+#if !UNITY_EDITOR
             InterstitialAd.Show(OnOpenCallback, OnCloseCallback, OnErrorCallback);
+#endif
+
             _saveLoadService.SaveProgress();
             _stateMachine.Enter<TransitionState, string>(TransitionScene, _staticData);
         }
-        
+
         private void OnOpenCallback()
         {
             Time.timeScale = 0;

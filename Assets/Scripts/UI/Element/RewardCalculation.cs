@@ -1,4 +1,5 @@
-﻿using Agava.YandexGames;
+﻿using System;
+using Agava.YandexGames;
 using Data;
 using Infrastructure.Service.SaveLoad;
 using TMPro;
@@ -17,7 +18,7 @@ namespace UI.Element
         [SerializeField] private TMP_Text _scoreText;
         [SerializeField] private TMP_Text _scoreLevel;
         [SerializeField] private TMP_Text _scoreEndGame;
-        [SerializeField] private Button _reward;
+        [SerializeField] private TMP_Text _maxScore;
 
         private float _timeDelay = 1.5f;
         private int _currentReward;
@@ -26,15 +27,17 @@ namespace UI.Element
         private int _factor = 2;
         private int _rewardScore;
 
-        public void LoadProgress(PlayerProgress progress)
+        private void Start()
         {
-            _countScore = progress.WorldData.Score;
+            _tableScore = PlayerPrefs.GetInt(TableScore);
+            _maxScore.text = _tableScore.ToString();
         }
 
-        public void UpdateProgress(PlayerProgress progress)
-        {
+        public void LoadProgress(PlayerProgress progress) => 
+            _countScore = progress.WorldData.Score;
+
+        public void UpdateProgress(PlayerProgress progress) => 
             progress.WorldData.Score = _countScore;
-        }
 
         public void GetReward(int reward) => 
             _currentReward += reward;
@@ -49,10 +52,8 @@ namespace UI.Element
             Invoke(nameof(StopTime), _timeDelay);
         }
 
-        public void ScoreLevel()
-        {
+        public void ScoreLevel() => 
             _scoreLevel.text = _currentReward.ToString();
-        }
 
         public void EndGameReward()
         {
@@ -64,10 +65,8 @@ namespace UI.Element
             Invoke(nameof(StopTime), _timeDelay);
         }
 
-        public void TakeReward()
-        {
-            VideoAd.Show(OnOpenCallback,OnCloseCallback, OnRewardedCallback, OnErrorCallback);
-        }
+        public void TakeReward() => 
+            VideoAd.Show(OnOpenCallback, OnRewardedCallback, OnCloseCallback, OnErrorCallback);
 
         private void OnOpenCallback()
         {
@@ -83,7 +82,8 @@ namespace UI.Element
             UpdateScore();
         }
 
-        private void OnRewardedCallback() => _rewardScore = _countScore * _factor;
+        private void OnRewardedCallback() => 
+            _rewardScore = _countScore * _factor;
 
         private void OnErrorCallback(string description)
         {

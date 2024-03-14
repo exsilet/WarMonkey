@@ -48,18 +48,36 @@ namespace Infrastructure
         
         private void OnEnable()
         {
-            WebApplication.InBackgroundChangeEvent += OnInBackgroundChange;
+            Application.focusChanged += OnInBackgroundChangeApp;
+            WebApplication.InBackgroundChangeEvent += OnInBackgroundChangeWeb;
         }
 
         private void OnDisable()
         {
-            WebApplication.InBackgroundChangeEvent -= OnInBackgroundChange;
+            WebApplication.InBackgroundChangeEvent -= OnInBackgroundChangeWeb;
         }
 
-        private void OnInBackgroundChange(bool inBackground)
+        private void OnInBackgroundChangeApp(bool inApp)
         {
-            AudioListener.pause = inBackground;
-            AudioListener.volume = inBackground ? 0f : 1f;
+            MuteAudio(!inApp);
+            PauseGame(!inApp);
+        }
+
+        private void OnInBackgroundChangeWeb(bool inBackground)
+        {
+            MuteAudio(inBackground);
+            PauseGame(inBackground);
+        }
+
+        private void MuteAudio(bool value)
+        {
+            AudioListener.pause = value;
+            AudioListener.volume = value ? 0f : 1f;
+        }
+
+        private void PauseGame(bool value)
+        {
+            Time.timeScale = value ? 0f : 1f;
         }
     }
 }
