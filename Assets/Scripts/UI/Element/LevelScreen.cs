@@ -17,6 +17,7 @@ namespace UI.Element
         private ISaveLoadService _saveLoadService;
         private PlayerProgress _playerProgress;
         private int _monsterQuantity = 3;
+        private bool _oneStart;
 
         private const string GameScene = "GameScene";
 
@@ -34,15 +35,25 @@ namespace UI.Element
         private void OnDisable() =>
             _startGame.onClick.RemoveListener(LoadNewGame);
 
-        public void LoadProgress(PlayerProgress progress) => 
+        public void LoadProgress(PlayerProgress progress)
+        {
             _playerProgress = progress;
+            _oneStart = progress.WorldData.OneStart;
+        }
 
         public void UpdateProgress(PlayerProgress progress)
         {
-            progress.WorldData.Level = GameScene;
-            progress.WorldData.Score = 0;
-            progress.WorldData.MonsterQuantity = _monsterQuantity;
-            progress.WorldData.CurrentLevels = 1;
+            Debug.Log("update");
+            
+            if (!_oneStart)
+            {
+                Debug.Log("new game");
+                progress.WorldData.Level = GameScene;
+                progress.WorldData.Score = 0;
+                progress.WorldData.MonsterQuantity = _monsterQuantity;
+                progress.WorldData.CurrentLevels = 1;
+                progress.WorldData.OneStart = true;
+            }
         }
 
         private void OnOpenCallback()

@@ -465,7 +465,14 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 1
+        functionName: NewBullet
+        data: 
+        objectReferenceParameter: {fileID: 2318921899238601141, guid: f29133e717f799b4b8af5f3a287dbd61, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask:
       - path: 
         weight: 1

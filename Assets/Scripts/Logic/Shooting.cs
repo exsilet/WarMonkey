@@ -13,6 +13,7 @@ namespace Logic
         [SerializeField] private float _maxForce;
         [SerializeField] private float _maxHoldTime = 2f;
         [SerializeField] private AudioSource _audioSource;
+        [SerializeField] private GameObject _bullet;
 
         private float _speedFilling = 3f;
         private float currentForce = 0f;
@@ -22,6 +23,11 @@ namespace Logic
         private void Update()
         {
             UpdateForce();
+        }
+
+        public void NewBullet()
+        {
+            _bullet.SetActive(true);
         }
 
         public void StartCharging()
@@ -38,6 +44,7 @@ namespace Logic
             if (charging)
             {
                 _heroAnimator.StopHolding();
+                _bullet.SetActive(false);
                 Shoot();
                 charging = false;
                 _forceSlider.gameObject.SetActive(false);

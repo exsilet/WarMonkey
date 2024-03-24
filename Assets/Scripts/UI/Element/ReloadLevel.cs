@@ -59,7 +59,7 @@ namespace UI.Element
                     Level = GameScene,
                     Score = 0,
                     MonsterQuantity = _monsterQuantity,
-                    CurrentLevels = 1
+                    CurrentLevels = 1,
                 }
             };
 

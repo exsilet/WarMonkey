@@ -1,20 +1,26 @@
 ﻿using System.Collections.Generic;
+using Data;
+using Infrastructure.Service.SaveLoad;
 using Player;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace UI.Element
 {
-    public class EndGame : MonoBehaviour
+    public class EndGame : MonoBehaviour, ISavedProgress
     {
         [SerializeField] private RewardCalculation _reward;
         [SerializeField] private Image _rewardEndWindow;
         [SerializeField] private ActorUI _actor;
 
         private List<GameObject> _players = new();
+        private HeroDeath _currentPlayer;
         private int _playerKilled;
         private int _maxPlayers;
-        private HeroDeath _currentPlayer;
+        private bool _isDeadHero;
+        private bool _oneStart;
+        private string _currentLevel;
 
         public void Construct(GameObject hero, int maxPlayers)
         {
@@ -24,6 +30,8 @@ namespace UI.Element
 
         private void Start()
         {
+            _currentLevel = SceneManager.GetActiveScene().name;
+            
             foreach (GameObject player in _players)
             {
                 _currentPlayer = player.GetComponent<HeroDeath>();
@@ -45,13 +53,29 @@ namespace UI.Element
         private void Slained(int playerKilled)
         {
             _playerKilled += playerKilled;
-            
-            if (_playerKilled == _maxPlayers)
+
+            if (_oneStart)
             {
-                _actor.GetRewardEnemy();
-                _reward.EndGameReward();
-                _rewardEndWindow.gameObject.SetActive(true);
+                if (_playerKilled >= _maxPlayers)
+                {
+                    _actor.GetRewardEnemy();
+                    _reward.EndGameReward();
+                    _rewardEndWindow.gameObject.SetActive(true);
+                    Time.timeScale = 0;
+                    _oneStart = false;
+                }
             }
+        }
+
+        public void LoadProgress(PlayerProgress progress)
+        {
+            _oneStart = progress.WorldData.OneStart;
+        }
+
+        public void UpdateProgress(PlayerProgress progress)
+        {
+            progress.WorldData.OneStart = _oneStart;
+            progress.WorldData.CurrentNameLevel = _currentLevel;
         }
     }
 }

@@ -35,7 +35,7 @@ namespace Player
 
         private void Die()
         {
-            _health.HealthChanged -= OnHealthChanged;
+            //_health.HealthChanged -= OnHealthChanged;
       
             _animator.PlayDeath();
             _playerKilled++;

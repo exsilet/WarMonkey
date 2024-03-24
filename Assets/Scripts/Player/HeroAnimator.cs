@@ -43,6 +43,7 @@ namespace Player
         
         public void Hold() => _animator.SetBool(IsHold, false);
         public void StopHolding() => _animator.SetBool(IsHold, true);
+        public void ResurrectionMonkey() => _animator.SetBool(Revive, true);
 
         public void EnteredState(int stateHash)
         {

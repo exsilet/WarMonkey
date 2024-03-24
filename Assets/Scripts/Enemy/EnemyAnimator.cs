@@ -7,6 +7,7 @@ namespace Enemy
     public class EnemyAnimator : MonoBehaviour, IAnimationStateReader
     {
         [SerializeField] public Animator _animator;
+        [SerializeField] public GameObject _bullet;
 
         private static readonly int IsMoving = Animator.StringToHash("IsMoving");
         private static readonly int Attack = Animator.StringToHash("AttackNormal");
@@ -38,6 +39,11 @@ namespace Enemy
         public void PlayAttack() => _animator.SetTrigger(Attack);
         public void PlayRevive() => _animator.SetTrigger(Revive);
 
+        public void NewBullet()
+        {
+            _bullet.SetActive(true);
+        }
+        
         public void EnteredState(int stateHash)
         {
             State = StateFor(stateHash);
@@ -62,6 +68,7 @@ namespace Enemy
             }
             else if (stateHash == _releasingTheButtonStateHash)
             {
+                _bullet.SetActive(false);
                 state = AnimatorState.AttackDawnUp;
             }
             else if (stateHash == _walkingStateHash)

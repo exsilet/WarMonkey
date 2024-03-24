@@ -9,6 +9,8 @@ namespace Data
         public int Score;
         public int MonsterQuantity;
         public int CurrentLevels;
+        public bool OneStart;
+        public string CurrentNameLevel;
 
         public WorldData(string level)
         {
@@ -16,6 +18,8 @@ namespace Data
             MonsterQuantity = 3;
             CurrentLevels = 1;
             Score = 0;
+            OneStart = true;
+            CurrentNameLevel = " ";
         }
     }
 }
