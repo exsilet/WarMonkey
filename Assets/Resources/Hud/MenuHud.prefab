@@ -5831,7 +5831,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _starNewGame: {fileID: 4338339452256946898}
   _continueGame: {fileID: 2996292681922523640}
-  _heroStaticData: {fileID: 0}
+  _heroStaticData: {fileID: 11400000, guid: 702c3cc61205bae499a4937227f5f46e, type: 2}
 --- !u!1 &3591523320069390653
 GameObject:
   m_ObjectHideFlags: 0

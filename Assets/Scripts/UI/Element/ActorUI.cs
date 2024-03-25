@@ -14,6 +14,7 @@ namespace UI.Element
         [SerializeField] private AudioSource _endGameMusic;
         [SerializeField] private RewardCalculation _reward;
         [SerializeField] private int _increasingNumberMonsters = 2;
+        [SerializeField] private int _delayWinPanel = 2;
 
         private List<GameObject> _spawnersPoint = new();
         private int _gameLevel = 1;
@@ -21,6 +22,7 @@ namespace UI.Element
         private int _maxSpawners;
         private SpawnPoint _currentSpawner;
         private int _monsterQuantity = 3;
+        private string _sceneName;
 
         public void Construct(GameObject enemySpawner, int monsterQuantity)
         {
@@ -66,22 +68,27 @@ namespace UI.Element
 
             if (_enemyKilled == _maxSpawners)
             {
-                CompleteLevel();
+                Invoke(nameof(WonTheLevel), _delayWinPanel);
+            }
+        }
 
-                foreach (GameObject spawner in _spawnersPoint)
-                {
-                    _reward.GetReward(spawner.GetComponentInChildren<LootEnemy>().Money);
-                }
+        private void WonTheLevel()
+        {
+            CompleteLevel();
 
-                _reward.ScoreLevel();
-                _reward.SetReward();
-                _rewardWindow.gameObject.SetActive(true);
+            foreach (GameObject spawner in _spawnersPoint)
+            {
+                _reward.GetReward(spawner.GetComponentInChildren<LootEnemy>().Money);
+            }
 
-                foreach (GameObject spawner in _spawnersPoint)
-                {
-                    _currentSpawner = spawner.GetComponent<SpawnPoint>();
-                    _currentSpawner.Slained -= Slained;
-                }
+            _reward.ScoreLevel();
+            _reward.SetReward();
+            _rewardWindow.gameObject.SetActive(true);
+
+            foreach (GameObject spawner in _spawnersPoint)
+            {
+                _currentSpawner = spawner.GetComponent<SpawnPoint>();
+                _currentSpawner.Slained -= Slained;
             }
         }
 

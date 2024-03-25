@@ -10,8 +10,10 @@ using UnityEngine.UI;
 
 namespace UI.Element
 {
-    public class ReturnGame : MonoBehaviour, ISavedProgress
+    public class ReturnGame : MonoBehaviour
     {
+        private const string KeyScene = "KeyScene";
+        
         [SerializeField] private Button _starNewGame;
         [SerializeField] private Button _continueGame;
         [SerializeField] private HeroStaticData _heroStaticData;
@@ -25,6 +27,7 @@ namespace UI.Element
 
         private void Start()
         {
+            _transferTo = PlayerPrefs.GetString(KeyScene);
             _progressService = AllServices.Container.Single<IPersistentProgressService>();
             _stateMachine = AllServices.Container.Single<IGameStateMachine>();
             
@@ -51,15 +54,6 @@ namespace UI.Element
                 _starNewGame.gameObject.SetActive(true);
                 _continueGame.gameObject.SetActive(false);
             }
-        }
-
-        public void LoadProgress(PlayerProgress progress)
-        {
-            _transferTo = progress.WorldData.Level;
-        }
-
-        public void UpdateProgress(PlayerProgress progress)
-        {
         }
     }
 }

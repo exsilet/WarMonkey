@@ -43,17 +43,14 @@ namespace UI.Element
 
         public void UpdateProgress(PlayerProgress progress)
         {
-            Debug.Log("update");
+            if (_oneStart) 
+                return;
             
-            if (!_oneStart)
-            {
-                Debug.Log("new game");
-                progress.WorldData.Level = GameScene;
-                progress.WorldData.Score = 0;
-                progress.WorldData.MonsterQuantity = _monsterQuantity;
-                progress.WorldData.CurrentLevels = 1;
-                progress.WorldData.OneStart = true;
-            }
+            progress.WorldData.Level = GameScene;
+            progress.WorldData.Score = 0;
+            progress.WorldData.MonsterQuantity = _monsterQuantity;
+            progress.WorldData.CurrentLevels = 1;
+            progress.WorldData.OneStart = true;
         }
 
         private void OnOpenCallback()

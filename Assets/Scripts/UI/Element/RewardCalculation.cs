@@ -1,5 +1,4 @@
-﻿using System;
-using Agava.YandexGames;
+﻿using Agava.YandexGames;
 using Data;
 using Infrastructure.Service.SaveLoad;
 using TMPro;
@@ -61,8 +60,6 @@ namespace UI.Element
             _scoreEndGame.text = _countScore.ToString();
 
             AccountCheck();
-            
-            Invoke(nameof(StopTime), _timeDelay);
         }
 
         public void TakeReward() => 
@@ -71,14 +68,13 @@ namespace UI.Element
         private void OnOpenCallback()
         {
             Time.timeScale = 0;
-            _rewardScore = _countScore * _factor;
-            AudioListener.pause = true;
+            AudioListener.volume = 0f;
         }
 
         private void OnCloseCallback()
         {
             Time.timeScale = 1;
-            AudioListener.pause = false;
+            AudioListener.volume = 1f;
             UpdateScore();
         }
 
@@ -88,9 +84,8 @@ namespace UI.Element
         private void OnErrorCallback(string description)
         {
             Time.timeScale = 1;
-            AudioListener.pause = false;
+            AudioListener.volume = 1f;
             _rewardScore = _countScore * _factor;
-            Debug.Log(description);
         }
 
         private void UpdateScore()

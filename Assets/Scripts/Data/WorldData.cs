@@ -10,7 +10,6 @@ namespace Data
         public int MonsterQuantity;
         public int CurrentLevels;
         public bool OneStart;
-        public string CurrentNameLevel;
 
         public WorldData(string level)
         {
@@ -19,7 +18,6 @@ namespace Data
             CurrentLevels = 1;
             Score = 0;
             OneStart = true;
-            CurrentNameLevel = " ";
         }
     }
 }

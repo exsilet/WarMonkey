@@ -13,6 +13,7 @@ namespace UI.Element
         [SerializeField] private RewardCalculation _reward;
         [SerializeField] private Image _rewardEndWindow;
         [SerializeField] private ActorUI _actor;
+        [SerializeField] private int _delayPanel = 2;
 
         private List<GameObject> _players = new();
         private HeroDeath _currentPlayer;
@@ -20,7 +21,6 @@ namespace UI.Element
         private int _maxPlayers;
         private bool _isDeadHero;
         private bool _oneStart;
-        private string _currentLevel;
 
         public void Construct(GameObject hero, int maxPlayers)
         {
@@ -30,8 +30,6 @@ namespace UI.Element
 
         private void Start()
         {
-            _currentLevel = SceneManager.GetActiveScene().name;
-            
             foreach (GameObject player in _players)
             {
                 _currentPlayer = player.GetComponent<HeroDeath>();
@@ -50,23 +48,6 @@ namespace UI.Element
             }
         }
 
-        private void Slained(int playerKilled)
-        {
-            _playerKilled += playerKilled;
-
-            if (_oneStart)
-            {
-                if (_playerKilled >= _maxPlayers)
-                {
-                    _actor.GetRewardEnemy();
-                    _reward.EndGameReward();
-                    _rewardEndWindow.gameObject.SetActive(true);
-                    Time.timeScale = 0;
-                    _oneStart = false;
-                }
-            }
-        }
-
         public void LoadProgress(PlayerProgress progress)
         {
             _oneStart = progress.WorldData.OneStart;
@@ -75,7 +56,32 @@ namespace UI.Element
         public void UpdateProgress(PlayerProgress progress)
         {
             progress.WorldData.OneStart = _oneStart;
-            progress.WorldData.CurrentNameLevel = _currentLevel;
+        }
+
+        private void Slained(int playerKilled)
+        {
+            _playerKilled += playerKilled;
+
+            if (_oneStart)
+            {
+                if (_playerKilled >= _maxPlayers)
+                {
+                    Invoke(nameof(OpenPanelEndGame), _delayPanel);
+                }
+            }
+            else
+            {
+                Invoke(nameof(OpenPanelEndGame), _delayPanel);
+            }
+        }
+
+        private void OpenPanelEndGame()
+        {
+            _actor.GetRewardEnemy();
+            _reward.EndGameReward();
+            _rewardEndWindow.gameObject.SetActive(true);
+            Time.timeScale = 0;
+            _oneStart = false;
         }
     }
 }

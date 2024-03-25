@@ -28,14 +28,24 @@ namespace Enemy
 
         public AnimatorState State { get; private set; }
         public bool IsAttacking => State == AnimatorState.Attack;
-        public void PlayHit() => _animator.SetTrigger(Hit);
+        public void PlayHit()
+        {
+            _animator.SetTrigger(Hit);
+            _bullet.SetActive(false);
+        }
+
         public void Move() => _animator.SetBool(IsMoving, true);
         public void StopMoving() => _animator.SetBool(IsMoving, false);
 
         public void Hold() => _animator.SetBool(IsHold, false);
         public void StopHolding() => _animator.SetBool(IsHold, true);
 
-        public void PlayDeath() => _animator.SetTrigger(Die);
+        public void PlayDeath()
+        {
+            _animator.SetTrigger(Die);
+            _bullet.SetActive(false);
+        }
+
         public void PlayAttack() => _animator.SetTrigger(Attack);
         public void PlayRevive() => _animator.SetTrigger(Revive);
 
@@ -77,6 +87,7 @@ namespace Enemy
             }
             else if (stateHash == _deathStateHash)
             {
+                _bullet.SetActive(false);
                 state = AnimatorState.Died;
             }
             else if (stateHash == _reviveStateHash)

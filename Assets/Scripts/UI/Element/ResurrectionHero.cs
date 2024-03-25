@@ -48,13 +48,13 @@ namespace UI.Element
         private void OnOpenCallback()
         {
             Time.timeScale = 0;
-            AudioListener.pause = true;
+            AudioListener.volume = 0f;
         }
 
         private void OnCloseCallback()
         {
             Time.timeScale = 1;
-            AudioListener.pause = false;
+            AudioListener.volume = 1f;
         }
 
         private void OnRewardedCallback()
@@ -65,7 +65,7 @@ namespace UI.Element
         private void OnErrorCallback(string description)
         {
             Time.timeScale = 1;
-            AudioListener.pause = false;
+            AudioListener.volume = 1f;
             Resurrection();
         }
     }

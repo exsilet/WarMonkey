@@ -1,5 +1,4 @@
-﻿using System;
-using Data;
+﻿using Data;
 using Infrastructure;
 using Infrastructure.LevelLogic;
 using Infrastructure.Service;
@@ -60,6 +59,7 @@ namespace UI.Element
                     Score = 0,
                     MonsterQuantity = _monsterQuantity,
                     CurrentLevels = 1,
+                    OneStart = true
                 }
             };
 

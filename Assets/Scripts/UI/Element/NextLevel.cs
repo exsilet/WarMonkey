@@ -42,31 +42,8 @@ namespace UI.Element
 
         private void Next()
         {
-#if !UNITY_EDITOR
-            InterstitialAd.Show(OnOpenCallback, OnCloseCallback, OnErrorCallback);
-#endif
-
             _saveLoadService.SaveProgress();
             _stateMachine.Enter<TransitionState, string>(TransitionScene, _staticData);
-        }
-
-        private void OnOpenCallback()
-        {
-            Time.timeScale = 0;
-            AudioListener.pause = true;
-        }
-
-        private void OnErrorCallback(string description)
-        {
-            Time.timeScale = 1;
-            AudioListener.pause = false;
-            Debug.Log(description);
-        }
-
-        private void OnCloseCallback(bool description)
-        {
-            Time.timeScale = 1;
-            AudioListener.pause = false;
         }
     }
 }

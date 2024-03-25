@@ -1,5 +1,4 @@
-﻿using System;
-using Agava.YandexGames;
+﻿using Agava.YandexGames;
 using UnityEngine;
 
 namespace UI.Element
@@ -23,20 +22,20 @@ namespace UI.Element
         private void OnOpenCallback()
         {
             Time.timeScale = 0;
-            AudioListener.pause = true;
+            AudioListener.volume = 0f;
         }
 
         private void OnErrorCallback(string description)
         {
             Time.timeScale = 1;
-            AudioListener.pause = false;
+            AudioListener.volume = 1f;
             Debug.Log(description);
         }
 
         private void OnCloseCallback(bool description)
         {
             Time.timeScale = 1;
-            AudioListener.pause = false;
+            AudioListener.volume = 1f;
         }
     }
 }

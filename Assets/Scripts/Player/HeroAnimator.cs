@@ -1,5 +1,4 @@
 ﻿using System;
-using Agava.YandexGames;
 using Logic;
 using UnityEngine;
 
@@ -7,6 +6,8 @@ namespace Player
 {
     public class HeroAnimator : MonoBehaviour, IAnimationStateReader
     {
+        [SerializeField] private GameObject _bullet;
+        
         private static readonly int Attack = Animator.StringToHash("AttackNormal");
         private static readonly int IsHold = Animator.StringToHash("IsHold");
         private static readonly int Hit = Animator.StringToHash("Hit");
@@ -30,17 +31,27 @@ namespace Player
 
         private void Awake() => _animator = GetComponent<Animator>();
 
+        public void NewBullet()
+        {
+            _bullet.SetActive(true);
+        }
+        
         public void PlayHit()
         {
             _animator.SetTrigger(Hit);
+            _bullet.SetActive(false);
         }
 
         public void PlayAttack() => _animator.SetTrigger(Attack);
         public bool IsAttacking => State == AnimatorState.Attack;
         public void PlayRevive() => _animator.SetTrigger(Revive);
         public void PlayBlocking() => _animator.SetTrigger(Blocking);
-        public void PlayDeath() => _animator.SetTrigger(Die);
-        
+        public void PlayDeath()
+        {
+            _animator.SetTrigger(Die);
+            _bullet.SetActive(false);
+        }
+
         public void Hold() => _animator.SetBool(IsHold, false);
         public void StopHolding() => _animator.SetBool(IsHold, true);
         public void ResurrectionMonkey() => _animator.SetBool(Revive, true);
@@ -61,6 +72,7 @@ namespace Player
             AnimatorState state;
             if (stateHash == _idleStateHash)
             {
+                _bullet.SetActive(false);
                 state = AnimatorState.Idle;
             }
             else if (stateHash == _attackStateHash)
@@ -81,6 +93,7 @@ namespace Player
             }
             else if (stateHash == _releasingTheButtonStateHash)
             {
+                _bullet.SetActive(false);
                 state = AnimatorState.AttackDawnUp;
             }
             else
