@@ -67,7 +67,8 @@ namespace Infrastructure.LevelLogic
                 GameObject hero = _gameFactory.CreateHero(_heroStaticData, player.transform);
                 selectedUnits.GetComponent<SelectUnit>().Construct(hero.GetComponent<Selectable>(), hud.GetComponent<StartBattle>());
                 hud.GetComponent<EndGame>().Construct(hero, GameObject.FindGameObjectsWithTag(InitialPointTag).Length);
-                hud.GetComponent<ResurrectionHero>().Construct(hero, GameObject.FindGameObjectsWithTag(InitialPointTag).Length);
+                //hud.GetComponent<ResurrectionHero>().Construct(hero, GameObject.FindGameObjectsWithTag(InitialPointTag).Length);
+                hud.GetComponent<YandexAdServices>().Construct(hero, GameObject.FindGameObjectsWithTag(InitialPointTag).Length);
             }
             
             InitHud(hud);

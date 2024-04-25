@@ -8,6 +8,7 @@ using Infrastructure.State;
 using Infrastructure.StaticData.Players;
 using UnityEngine;
 using UnityEngine.UI;
+using YG;
 
 namespace UI.Element
 {
@@ -43,6 +44,7 @@ namespace UI.Element
 
         public void Reload()
         {
+            YandexGame.FullscreenShow();
             _saveLoadService.ResetProgress();
             _progressService.Progress = NewProgress();
             _saveLoadService.SaveProgress();

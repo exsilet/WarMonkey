@@ -1,10 +1,10 @@
-﻿using Agava.YandexGames;
-using Data;
+﻿using Data;
 using Infrastructure.Service;
 using Infrastructure.Service.SaveLoad;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using YG;
 
 namespace UI.Element
 {
@@ -27,9 +27,9 @@ namespace UI.Element
         private void OnEnable()
         {
             _startGame.onClick.AddListener(LoadNewGame);
-
-            YandexGamesSdk.GameReady();
-            InterstitialAd.Show(OnOpenCallback, OnCloseCallback, OnErrorCallback);
+            
+            // YandexGamesSdk.GameReady();
+            // InterstitialAd.Show(OnOpenCallback, OnCloseCallback, OnErrorCallback);
         }
 
         private void OnDisable() =>

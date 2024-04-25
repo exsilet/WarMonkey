@@ -1,41 +1,46 @@
-﻿using Agava.YandexGames;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
+using YG;
 
 namespace UI.Element
 {
     public class RewardAD : MonoBehaviour
     {
-        [SerializeField] private float _invokeDelay;
-
-        private void Start()
+        [SerializeField] private Button _rewardButton;
+        
+        private void OnEnable()
         {
-            Invoke(nameof(Reward), _invokeDelay);
+            YandexAdServices.RewardClosed += RewardClosed;
         }
 
-        private void Reward()
+        private void OnDisable()
         {
-#if !UNITY_EDITOR
-            InterstitialAd.Show(OnOpenCallback, OnCloseCallback, OnErrorCallback);
-#endif
+            YandexAdServices.RewardClosed -= RewardClosed;
+        }
+
+        public void WatchVideoAd(int id)
+        {
+            YandexGame.RewVideoShow(id);
+            _rewardButton.interactable = false;
+        }
+
+        private void RewardClosed()
+        {
+            _rewardButton.interactable = true;
         }
         
-        private void OnOpenCallback()
-        {
-            Time.timeScale = 0;
-            AudioListener.volume = 0f;
-        }
-
-        private void OnErrorCallback(string description)
-        {
-            Time.timeScale = 1;
-            AudioListener.volume = 1f;
-            Debug.Log(description);
-        }
-
-        private void OnCloseCallback(bool description)
-        {
-            Time.timeScale = 1;
-            AudioListener.volume = 1f;
-        }
+//         [SerializeField] private float _invokeDelay;
+//
+//         private void Start()
+//         {
+//             Invoke(nameof(Reward), _invokeDelay);
+//         }
+//
+//         private void Reward()
+//         {
+// #if !UNITY_EDITOR
+//             YandexGame.FullscreenShow();
+// #endif
+//         }
     }
 }

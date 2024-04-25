@@ -3,6 +3,7 @@ using Infrastructure.Service;
 using Infrastructure.Service.SaveLoad;
 using Infrastructure.State;
 using UnityEngine;
+using YG;
 
 namespace UI.Element
 {
@@ -21,6 +22,7 @@ namespace UI.Element
 
         public void ClickMenu()
         {
+            YandexGame.FullscreenShow();
             _saveLoadService.SaveProgress();
             _stateMachine.Enter<LoadMenuState, string>(_transferTo);
         }

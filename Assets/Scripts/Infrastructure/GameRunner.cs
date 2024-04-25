@@ -1,6 +1,4 @@
 using System.Collections;
-using Agava.WebUtility;
-using Agava.YandexGames;
 using UnityEngine;
 
 namespace Infrastructure
@@ -14,16 +12,16 @@ namespace Infrastructure
 
         private IEnumerator LaunchSDK()
         {
-#if !UNITY_WEBGL || !UNITY_EDITOR
-            while (!YandexGamesSdk.IsInitialized)
-                yield return YandexGamesSdk.Initialize();
-
-            if (PlayerAccount.IsAuthorized)
-                PlayerAccount.GetCloudSaveData(OnSuccessCallback, OnErrorCallback);
-            else
-                StartGame();
-            
-#endif
+// #if //!UNITY_WEBGL || !UNITY_EDITOR
+//             while (!YandexGamesSdk.IsInitialized)
+//                 yield return YandexGamesSdk.Initialize();
+//
+//             if (PlayerAccount.IsAuthorized)
+//                 PlayerAccount.GetCloudSaveData(OnSuccessCallback, OnErrorCallback);
+//             else
+//                 StartGame();
+//             
+// #endif
             yield return new WaitForSeconds(0f);
             StartGame();
         }
@@ -48,13 +46,14 @@ namespace Infrastructure
         
         private void OnEnable()
         {
-            Application.focusChanged += OnInBackgroundChangeApp;
-            WebApplication.InBackgroundChangeEvent += OnInBackgroundChangeWeb;
+            //Application.focusChanged += OnInBackgroundChangeApp;
+            //WebApplication.InBackgroundChangeEvent += OnInBackgroundChangeWeb;
         }
 
         private void OnDisable()
         {
-            WebApplication.InBackgroundChangeEvent -= OnInBackgroundChangeWeb;
+            //Application.focusChanged -= OnInBackgroundChangeApp;
+            //WebApplication.InBackgroundChangeEvent -= OnInBackgroundChangeWeb;
         }
 
         private void OnInBackgroundChangeApp(bool inApp)

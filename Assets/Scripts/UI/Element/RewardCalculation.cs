@@ -1,9 +1,10 @@
-﻿using Agava.YandexGames;
+﻿using System;
 using Data;
 using Infrastructure.Service.SaveLoad;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using YG;
 
 namespace UI.Element
 {
@@ -25,6 +26,8 @@ namespace UI.Element
         private int _tableScore;
         private int _factor = 2;
         private int _rewardScore;
+        
+        public static Action<int> ScoreClosed;
 
         private void Start()
         {
@@ -32,11 +35,15 @@ namespace UI.Element
             _maxScore.text = _tableScore.ToString();
         }
 
-        public void LoadProgress(PlayerProgress progress) => 
+        public void LoadProgress(PlayerProgress progress)
+        {
             _countScore = progress.WorldData.Score;
+        }
 
-        public void UpdateProgress(PlayerProgress progress) => 
+        public void UpdateProgress(PlayerProgress progress)
+        {
             progress.WorldData.Score = _countScore;
+        }
 
         public void GetReward(int reward) => 
             _currentReward += reward;
@@ -45,7 +52,9 @@ namespace UI.Element
         {
             _countScore += _currentReward;
             _scoreText.text = _countScore.ToString();
-
+            
+            ScoreClosed?.Invoke(_countScore);
+            
             AccountCheck();
             
             Invoke(nameof(StopTime), _timeDelay);
@@ -58,39 +67,19 @@ namespace UI.Element
         {
             _countScore += _currentReward;
             _scoreEndGame.text = _countScore.ToString();
+            ScoreClosed?.Invoke(_countScore);
 
             AccountCheck();
         }
 
-        public void TakeReward() => 
-            VideoAd.Show(OnOpenCallback, OnRewardedCallback, OnCloseCallback, OnErrorCallback);
-
-        private void OnOpenCallback()
+        public void TakeReward()
         {
-            Time.timeScale = 0;
-            AudioListener.volume = 0f;
+            //VideoAd.Show(OnOpenCallback, OnRewardedCallback, OnCloseCallback, OnErrorCallback);
         }
 
-        private void OnCloseCallback()
+        public void UpdateScore(int rewardScore)
         {
-            Time.timeScale = 1;
-            AudioListener.volume = 1f;
-            UpdateScore();
-        }
-
-        private void OnRewardedCallback() => 
-            _rewardScore = _countScore * _factor;
-
-        private void OnErrorCallback(string description)
-        {
-            Time.timeScale = 1;
-            AudioListener.volume = 1f;
-            _rewardScore = _countScore * _factor;
-        }
-
-        private void UpdateScore()
-        {
-            _countScore = _rewardScore;
+            _countScore = rewardScore;
             _scoreText.text = _countScore.ToString();
 
             AccountCheck();
@@ -108,7 +97,12 @@ namespace UI.Element
             if (_tableScore < _countScore)
             {
                 _tableScore = _countScore;
+                
                 PlayerPrefs.SetInt(TableScore, _tableScore);
+                YandexGame.savesData.Score = _countScore;
+                
+                YandexGame.NewLeaderboardScores("TopMonkey", _countScore);
+                YandexGame.SaveProgress();
                 PlayerPrefs.Save();
             }
         }

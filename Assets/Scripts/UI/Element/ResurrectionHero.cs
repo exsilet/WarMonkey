@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Agava.YandexGames;
+﻿using System.Collections.Generic;
 using Infrastructure.StaticData.Players;
 using Player;
 using UnityEngine;
@@ -27,7 +25,7 @@ namespace UI.Element
         public void TakeReward()
         {
 #if !UNITY_EDITOR
-            VideoAd.Show(OnOpenCallback, OnRewardedCallback, OnCloseCallback, OnErrorCallback);
+            //VideoAd.Show(OnOpenCallback, OnRewardedCallback, OnCloseCallback, OnErrorCallback);
 #endif
         }
 

@@ -1,5 +1,4 @@
-﻿using Agava.YandexGames;
-using Data;
+﻿using Data;
 using Infrastructure.LevelLogic;
 using Infrastructure.Service;
 using Infrastructure.Service.SaveLoad;
@@ -7,6 +6,7 @@ using Infrastructure.State;
 using Infrastructure.StaticData.Players;
 using UnityEngine;
 using UnityEngine.UI;
+using YG;
 
 namespace UI.Element
 {
@@ -42,6 +42,7 @@ namespace UI.Element
 
         private void Next()
         {
+            YandexGame.FullscreenShow();
             _saveLoadService.SaveProgress();
             _stateMachine.Enter<TransitionState, string>(TransitionScene, _staticData);
         }
